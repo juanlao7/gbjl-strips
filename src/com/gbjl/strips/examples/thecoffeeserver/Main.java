@@ -30,9 +30,9 @@ public class Main implements HeuristicProvider {
         // TODO: read initial and goal state from a file.
         // TODO: add default conditions to the initial state, such as Robot-free and Steps(0)
         
-        Set<Predicate> initialState = new HashSet<Predicate>();
+        Set<Predicate> initialState = new HashSet<>();
         
-        Set<Predicate> goalState = new HashSet<Predicate>();
+        Set<Predicate> goalState = new HashSet<>();
         
         Solver solver = new Solver();
         
@@ -49,7 +49,7 @@ public class Main implements HeuristicProvider {
     }
     
     private Set<Operator> createOperators() {
-        Set<Operator> operators = new HashSet<Operator>();
+        Set<Operator> operators = new HashSet<>();
         
         // Make
         Operator makeOperator = new Operator("Make");
@@ -91,7 +91,7 @@ public class Main implements HeuristicProvider {
     public ArrayList<Predicate> heuristicSortPredicateSet(Set<Predicate> currentState, ArrayList<Element> currentStack, PredicateSet predicateSet) {
         // TODO: fill this function
         // The first element of the array is the first element to be stacked in the stack.
-        return new ArrayList<Predicate>(predicateSet);
+        return new ArrayList<>(predicateSet);
     }
 
     @Override
