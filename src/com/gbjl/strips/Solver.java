@@ -16,7 +16,7 @@ public class Solver {
     }
     
     public ArrayList<Operator> solve(Set<Operator> operators, Set<Predicate> initialState, Set<Predicate> goalState, HeuristicProvider heuristicProvider) throws STRIPSException {
-        Set<Predicate> currentState = new HashSet<>(initialState);
+        PredicateSet currentState = new PredicateSet(initialState);
         ArrayList<Operator> plan = new ArrayList<>();
         ArrayList<Element> stack = new ArrayList<>();
         PredicateSet goalStateAsPredicateSet = new PredicateSet(goalState);
@@ -97,7 +97,7 @@ public class Solver {
         return plan;
     }
     
-    private Operator searchOperator(Set<Operator> operators, Set<Predicate> state, ArrayList<Element> stack, Predicate desiredCondition, HeuristicProvider heuristicProvider) throws OperatorNotFoundSTRIPSException {
+    private Operator searchOperator(Set<Operator> operators, PredicateSet state, ArrayList<Element> stack, Predicate desiredCondition, HeuristicProvider heuristicProvider) throws OperatorNotFoundSTRIPSException {
         String desiredConditionName = desiredCondition.getName();
         boolean isDesiredConditionNegated = desiredCondition.isNegated();
         ArrayList<Param> desiredConditionParams = desiredCondition.getParams();
@@ -133,13 +133,13 @@ public class Solver {
         }
         
         if (candidates.isEmpty()) {
-            throw new OperatorNotFoundSTRIPSException();
+            throw new OperatorNotFoundSTRIPSException("Predicate \"" + desiredCondition + "\" cannot be reached with the given operators.");
         }
         
         return heuristicProvider.heuristicBestOperator(state, stack, candidates);
     }
     
-    private Map<String, Param> searchInstantiation(Set<Predicate> state, ArrayList<Element> stack, Predicate partiallyInstantiatedPredicate, HeuristicProvider heuristicProvider) throws InstantiationNotFoundSTRIPSException {
+    private Map<String, Param> searchInstantiation(PredicateSet state, ArrayList<Element> stack, Predicate partiallyInstantiatedPredicate, HeuristicProvider heuristicProvider) throws InstantiationNotFoundSTRIPSException {
         String partiallyInstantiatedPredicateName = partiallyInstantiatedPredicate.getName();
         boolean isPartiallyInstantiatedPredicateNegated = partiallyInstantiatedPredicate.isNegated();
         ArrayList<Param> partiallyInstantiatedPredicateParams = partiallyInstantiatedPredicate.getParams();
@@ -179,7 +179,7 @@ public class Solver {
         }
         
         if (candidates.isEmpty()) {
-            throw new InstantiationNotFoundSTRIPSException();
+            throw new InstantiationNotFoundSTRIPSException("Predicate \"" + partiallyInstantiatedPredicate + "\" cannot be instantiated in the state \"" + state + "\".");
         }
         
         return heuristicProvider.heuristicBestInstantiation(state, stack, candidates);

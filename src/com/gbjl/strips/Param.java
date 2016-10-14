@@ -16,4 +16,8 @@ public class Param {
     public boolean isInstantiated() {
         return this.instantiated;
     }
+    
+    public String toString() {
+        return this.name;
+    }
 }

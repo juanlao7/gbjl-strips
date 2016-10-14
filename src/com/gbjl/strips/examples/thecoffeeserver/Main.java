@@ -2,9 +2,7 @@ package com.gbjl.strips.examples.thecoffeeserver;
 
 import com.gbjl.strips.Element;
 import com.gbjl.strips.HeuristicProvider;
-import com.gbjl.strips.InstantiationNotFoundSTRIPSException;
 import com.gbjl.strips.Operator;
-import com.gbjl.strips.OperatorNotFoundSTRIPSException;
 import com.gbjl.strips.Param;
 import com.gbjl.strips.Predicate;
 import com.gbjl.strips.PredicateSet;
@@ -38,13 +36,9 @@ public class Main implements HeuristicProvider {
         
         try {
             ArrayList<Operator> plan = solver.solve(operators, initialState, goalState, this);
-            // TODO: success message
-        } catch (OperatorNotFoundSTRIPSException ex) {
-            // TODO: error message
-        } catch (InstantiationNotFoundSTRIPSException ex) {
-            // TODO: error message            
+            System.out.println(plan);
         } catch (STRIPSException ex) {
-            // TODO: error message            
+            System.err.println("Error. " + ex.getMessage());
         }
     }
     

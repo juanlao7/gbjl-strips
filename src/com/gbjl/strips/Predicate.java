@@ -78,4 +78,50 @@ public class Predicate implements Element {
             }
         }
     }
+    
+    public static Predicate fromString(String representation) {
+        boolean negated = false;
+        int nameStart = 0;
+        
+        if (representation.charAt(0) == '¬') {
+            negated = true;
+            nameStart = 1;
+        }
+        
+        int parenthesisPosition = representation.indexOf("(");
+        
+        if (parenthesisPosition < 0) {
+            return new Predicate(representation.substring(nameStart), negated);
+        }
+        
+        String[] paramList = representation.substring(parenthesisPosition + 1, representation.length() - 1).split(",");
+        return new Predicate(representation.substring(nameStart, parenthesisPosition), negated, paramList, true);
+    }
+    
+    public String toString() {
+        return ((this.negated) ? "¬" : "") + nameAndParamsToString(this.name, this.params, false);
+    }
+    
+    public static String nameAndParamsToString(String name, ArrayList<Param> params, boolean addParenthesisWithNoParams) {
+        if (params.isEmpty() && !addParenthesisWithNoParams) {
+            return name;
+        }
+        
+        StringBuilder builder = new StringBuilder();
+        builder.append(name);
+        builder.append("(");
+        
+        if (!params.isEmpty()) {
+            Iterator<Param> i = params.iterator();
+            builder.append(i.next());
+
+            while (i.hasNext()) {
+                builder.append(",");
+                builder.append(i.next());
+            }
+        }
+        
+        builder.append(")");
+        return builder.toString();
+    }
 }

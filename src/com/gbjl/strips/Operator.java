@@ -58,4 +58,8 @@ public class Operator implements Element {
         this.preconditions.replaceParams(replacement);
         this.postconditions.replaceParams(replacement);
     }
+    
+    public String toString() {
+        return Predicate.nameAndParamsToString(this.name, this.params, true);
+    }
 }

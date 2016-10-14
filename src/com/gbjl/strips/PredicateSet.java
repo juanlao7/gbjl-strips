@@ -22,4 +22,30 @@ public class PredicateSet extends HashSet<Predicate> implements Element {
             i.next().replaceParams(replacement);
         }
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        Iterator<Predicate> i = this.iterator();
+        
+        while (i.hasNext()) {
+            builder.append(i.next());
+            builder.append(";");
+        }
+        
+        return builder.toString();
+    }
+    
+    public static PredicateSet fromString(String representation) {
+        PredicateSet predicateSet = new PredicateSet();
+        String[] predicateList = representation.split(";");
+        
+        for (int i = 0; i < predicateList.length; ++i) {
+            if (!predicateList[i].isEmpty()) {
+                predicateSet.add(Predicate.fromString(predicateList[i]));
+            }
+        }
+        
+        return predicateSet;
+    }
 }
