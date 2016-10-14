@@ -1,8 +1,8 @@
 package com.gbjl.strips;
 
 public class Param {
-    private String name;
-    private boolean instantiated;
+    private final String name;
+    private final boolean instantiated;
     
     public Param(String name, boolean instantiated) {
         this.name = name;

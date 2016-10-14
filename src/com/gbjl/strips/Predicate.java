@@ -5,14 +5,14 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Predicate implements Element {
-    private String name;
+    private final String name;
     private ArrayList<Param> params;
-    private boolean negated;
+    private final boolean negated;
     
     public Predicate(String name, boolean negated) {
         this.name = name;
         this.negated = negated;
-        this.params = new ArrayList<Param>();
+        this.params = new ArrayList<>();
     }
     
     public Predicate(String name, boolean negated, String[] params, boolean instantiated) {
@@ -23,9 +23,8 @@ public class Predicate implements Element {
         }
     }
     
-    public Predicate addParam(Param param) {
+    public void addParam(Param param) {
         this.params.add(param);
-        return this;
     }
     
     public String getName() {
@@ -33,8 +32,7 @@ public class Predicate implements Element {
     }
     
     public ArrayList<Param> getParams() {
-        // TODO: return a copy?
-        return this.params;
+        return new ArrayList<>(this.params);
     }
     
     public boolean isNegated() {
@@ -43,8 +41,7 @@ public class Predicate implements Element {
     
     public Predicate getInverse() {
         Predicate inverse = new Predicate(this.name, !this.negated);
-        // TODO: copy?
-        inverse.params = this.params;
+        inverse.params = new ArrayList<>(this.params);
         return inverse;
     }
     
@@ -62,15 +59,22 @@ public class Predicate implements Element {
     
     @Override
     public void replaceParams(Map<String, Param> replacement) {
-        // TODO: replace only the uninstantiated ones
-        int n = this.params.size();
+        replaceParamsFromAList(replacement, this.params);
+    }
+    
+    public static void replaceParamsFromAList(Map<String, Param> replacement, ArrayList<Param> list) {
+        int n = list.size();
         
         for (int i = 0; i < n; ++i) {
-            Param paramReplacement = replacement.get(this.params.get(i).getName());
+            Param originalParam = list.get(i);
             
-            if (paramReplacement != null) {
-                this.params.add(i, paramReplacement);
-                this.params.remove(i + 1);
+            if (!originalParam.isInstantiated()) {
+                Param paramReplacement = replacement.get(originalParam.getName());
+            
+                if (paramReplacement != null) {
+                    list.add(i, paramReplacement);
+                    list.remove(i + 1);
+                }
             }
         }
     }

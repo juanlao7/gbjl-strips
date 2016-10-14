@@ -11,11 +11,14 @@ public class Solver {
     public Solver() {
     }
     
-    // TODO: maybe it's better to force the user to pass specific type structures that are more efficient for our use case
+    public ArrayList<Operator> solve(Set<Operator> operators, Set<Predicate> initialState, Set<Predicate> goalState) throws STRIPSException {
+        return this.solve(operators, initialState, goalState, null);
+    }
+    
     public ArrayList<Operator> solve(Set<Operator> operators, Set<Predicate> initialState, Set<Predicate> goalState, HeuristicProvider heuristicProvider) throws STRIPSException {
-        Set<Predicate> currentState = new HashSet<Predicate>(initialState);
-        ArrayList<Operator> plan = new ArrayList<Operator>();
-        ArrayList<Element> stack = new ArrayList<Element>();
+        Set<Predicate> currentState = new HashSet<>(initialState);
+        ArrayList<Operator> plan = new ArrayList<>();
+        ArrayList<Element> stack = new ArrayList<>();
         PredicateSet goalStateAsPredicateSet = new PredicateSet(goalState);
         stack.add(goalStateAsPredicateSet);
         Iterator<Predicate> i;
@@ -98,7 +101,7 @@ public class Solver {
         String desiredConditionName = desiredCondition.getName();
         boolean isDesiredConditionNegated = desiredCondition.isNegated();
         ArrayList<Param> desiredConditionParams = desiredCondition.getParams();
-        Set<Operator> candidates = new HashSet<Operator>();
+        Set<Operator> candidates = new HashSet<>();
         Iterator<Operator> i = operators.iterator();
         
         while (i.hasNext()) {
@@ -110,7 +113,7 @@ public class Solver {
                 
                 if (postcondition.getName().equals(desiredConditionName) && postcondition.isNegated() == isDesiredConditionNegated) {
                     operator = new Operator(operator);
-                    Map<String, Param> replacement = new HashMap<String, Param>();
+                    Map<String, Param> replacement = new HashMap<>();
                     ArrayList<Param> postconditionParams = postcondition.getParams();
                     int n = postcondition.getParams().size();
                     
@@ -140,14 +143,14 @@ public class Solver {
         String partiallyInstantiatedPredicateName = partiallyInstantiatedPredicate.getName();
         boolean isPartiallyInstantiatedPredicateNegated = partiallyInstantiatedPredicate.isNegated();
         ArrayList<Param> partiallyInstantiatedPredicateParams = partiallyInstantiatedPredicate.getParams();
-        Set<Map<String, Param>> candidates = new HashSet<Map<String, Param>>();
+        Set<Map<String, Param>> candidates = new HashSet<>();
         Iterator<Predicate> i = state.iterator();
         
         while (i.hasNext()) {
             Predicate statePredicate = i.next();
             
             if (statePredicate.getName().equals(partiallyInstantiatedPredicateName) && statePredicate.isNegated() == isPartiallyInstantiatedPredicateNegated) {
-                Map<String, Param> replacement = new HashMap<String, Param>();
+                Map<String, Param> replacement = new HashMap<>();
                 boolean discard = false;
                 ArrayList<Param> statePredicateParams = statePredicate.getParams();
                 int n = statePredicateParams.size();
