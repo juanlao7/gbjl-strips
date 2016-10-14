@@ -8,38 +8,62 @@ import com.gbjl.strips.Predicate;
 import com.gbjl.strips.PredicateSet;
 import com.gbjl.strips.STRIPSException;
 import com.gbjl.strips.Solver;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 public class Main implements HeuristicProvider {
+    private Set<Predicate> initialState;
+    private Set<Predicate> goalState;
+    private Set<Operator> operators;
+    
     public static void main(String[] args) {
-        Main main = new Main();
+        Main main = new Main(args);
         main.run();
     }
     
-    private Main() {
+    private Main(String[] args) {
+        if (args.length != 1) {
+            System.err.println("Usage: java -jar gbjl-strips.jar <input file>");
+        }
+        
+        try {
+            InputStream inStream = new FileInputStream(new File(args[0]));
+            Properties input = new Properties();
+            input.load(inStream);
+            
+            this.initialState = this.readState(input, "InitialState");
+            this.goalState = this.readState(input, "GoalState");
+            this.operators = this.createOperators();
+            
+            // TODO: add default conditions to the initial state, such as Robot-free and Steps(0)
+        } catch (Exception ex) {
+            System.err.println("Error. " + ex.getMessage());
+        }
     }
     
     private void run() {
-        Set<Operator> operators = this.createOperators();
-        
-        // TODO: read initial and goal state from a file.
-        // TODO: add default conditions to the initial state, such as Robot-free and Steps(0)
-        
-        Set<Predicate> initialState = new HashSet<>();
-        
-        Set<Predicate> goalState = new HashSet<>();
-        
         Solver solver = new Solver();
         
         try {
-            ArrayList<Operator> plan = solver.solve(operators, initialState, goalState, this);
+            ArrayList<Operator> plan = solver.solve(this.operators, this.initialState, this.goalState, this);
             System.out.println(plan);
         } catch (STRIPSException ex) {
             System.err.println("Error. " + ex.getMessage());
         }
+    }
+    
+    private Set<Predicate> readState(Properties input, String key) throws Exception {
+        if (!input.contains(key)) {
+            throw new Exception("State \"" + key + "\" not found in the input file.");
+        }
+        
+        return PredicateSet.fromString(input.getProperty(key));
     }
     
     private Set<Operator> createOperators() {
