@@ -38,11 +38,11 @@ public class Operator implements Element {
     }
     
     public Set<Predicate> getPreconditions(Set<Predicate> state) {
-        return new HashSet<>(this.preconditions);
+        return new PredicateSet(this.preconditions);
     }
     
     public Set<Predicate> getPostconditions(Set<Predicate> state) {
-        return new HashSet<>(this.postconditions);
+        return new PredicateSet(this.postconditions);
     }
     
     public Operator copy() {

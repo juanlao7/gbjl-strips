@@ -17,6 +17,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main implements HeuristicProvider, STRIPSLogger {
     private Set<Predicate> initialState;
@@ -28,6 +30,13 @@ public class Main implements HeuristicProvider, STRIPSLogger {
             Main main = new Main(args);
             main.run();
         } catch (Exception e) {
+            System.out.flush();
+            
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+            }
+            
             System.err.println("Error. " + e.getMessage());
             System.exit(1);
         }

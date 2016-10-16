@@ -31,7 +31,7 @@ public class Solver {
         }
         
         while (i.hasNext()) {
-            stack.add(i.next());
+            stack.add(new Predicate(i.next()));
         }
         
         this.logln(logger, "STRIPS execution started");
@@ -57,13 +57,13 @@ public class Solver {
                         currentState.remove(postcondition.getInverse());
                     }
                     else {
-                        currentState.add(postcondition);
+                        currentState.add(new Predicate(postcondition));
                     }
                 }
                 
                 this.logState(logger, "Current state", currentState);
                 this.logln(logger, "Adding " + operator + " to the plan");
-                plan.add(operator);
+                plan.add(operator.copy());
                 this.logCurrentPlan(logger, plan);
             }
             else if (element instanceof PredicateSet) {
@@ -84,7 +84,7 @@ public class Solver {
                     
                     if (!currentState.contains(predicate)) {
                         this.logln(logger, " (not included in the current state, added to the stack)");
-                        stack.add(predicate);
+                        stack.add(new Predicate(predicate));
                     }
                     else {
                         this.logln(logger, " (already included in the current state)");
@@ -103,13 +103,13 @@ public class Solver {
                         this.logln(logger, "Searching for an operator that reaches the predicate " + predicate + "...");
                         Operator operator = this.searchOperator(operators, currentState, stack, predicate, heuristicProvider, logger);
                         this.logln(logger, "Operator " + operator + " reaches the predicate " + predicate + ", added to the stack with the required preconditions");
-                        stack.add(operator);
+                        stack.add(operator.copy());
                         Set<Predicate> operatorPreconditions = operator.getPreconditions(currentState);
                         stack.add(new PredicateSet(operatorPreconditions));
                         i = operatorPreconditions.iterator();
                         
                         while (i.hasNext()) {
-                            stack.add(i.next());
+                            stack.add(new Predicate(i.next()));
                         }
                     }
                     else {

@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class Predicate implements Element {
     private final String name;
-    private ArrayList<Param> params;
     private final boolean negated;
+    private ArrayList<Param> params;
     
     public Predicate(String name, boolean negated) {
         this.name = name;
@@ -21,6 +21,12 @@ public class Predicate implements Element {
         for (int i = 0; i < params.length; ++i) {
             this.params.add(new Param(params[i], instantiated));
         }
+    }
+    
+    public Predicate(Predicate original) {
+        this.name = original.name;
+        this.negated = original.negated;
+        this.params = new ArrayList<>(original.params);
     }
     
     public void addParam(Param param) {

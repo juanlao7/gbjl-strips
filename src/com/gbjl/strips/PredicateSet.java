@@ -11,7 +11,12 @@ public class PredicateSet extends HashSet<Predicate> implements Element {
     }
     
     public PredicateSet(Set<Predicate> original) {
-        super(original);
+        super();
+        Iterator<Predicate> i = original.iterator();
+        
+        while (i.hasNext()) {
+            this.add(new Predicate(i.next()));
+        }
     }
     
     @Override
