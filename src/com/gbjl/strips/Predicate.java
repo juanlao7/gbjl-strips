@@ -19,7 +19,7 @@ public class Predicate implements Element {
         this(name, negated);
         
         for (int i = 0; i < params.length; ++i) {
-            this.addParam(new Param(params[i], instantiated));
+            this.params.add(new Param(params[i], instantiated));
         }
     }
     
@@ -55,6 +55,25 @@ public class Predicate implements Element {
         }
         
         return true;
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Predicate) {
+            Predicate otherPredicate = (Predicate)other;
+            return (this.name.equals(otherPredicate.name) && this.negated == otherPredicate.negated && this.params.equals(otherPredicate.params));
+        }
+        
+        return (this == other);
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 1;
+        hash = hash * 17 + this.name.hashCode();
+        hash = hash * 31 + this.params.hashCode();
+        hash = hash * 13 + (this.negated ? 0 : 1);
+        return hash;
     }
     
     @Override
@@ -98,6 +117,7 @@ public class Predicate implements Element {
         return new Predicate(representation.substring(nameStart, parenthesisPosition), negated, paramList, true);
     }
     
+    @Override
     public String toString() {
         return ((this.negated) ? "¬" : "") + nameAndParamsToString(this.name, this.params, false);
     }

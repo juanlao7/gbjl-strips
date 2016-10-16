@@ -3,6 +3,8 @@ package com.gbjl.strips.examples.thecoffeeserver;
 import com.gbjl.strips.Operator;
 import com.gbjl.strips.Param;
 import com.gbjl.strips.Predicate;
+import com.gbjl.strips.PredicateSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -17,7 +19,16 @@ public class MoveOperator extends Operator {
         
         this.addPostcondition(new Predicate("Robot-location", false, new String[]{"o2"}, false));
         this.addPostcondition(new Predicate("Robot-location", true, new String[]{"o1"}, false));
-        // Postcondition Steps(x + distance(o1, o2)) and ¬Steps(x) will be added on the fly.
+        // Postconditions ¬Steps(x) and Steps(x + distance(o1, o2)) will be added on the fly.
+    }
+    
+    @Override
+    public Operator copy() {
+        MoveOperator copy = new MoveOperator();
+        copy.params = new ArrayList<>(this.params);
+        copy.preconditions = new PredicateSet(this.preconditions);
+        copy.postconditions = new PredicateSet(this.postconditions);
+        return copy;
     }
     
     @Override
