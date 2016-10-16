@@ -104,9 +104,15 @@ public class Solver {
                         Operator operator = this.searchOperator(operators, currentState, stack, predicate, heuristicProvider, logger);
                         this.logln(logger, "Operator " + operator + " reaches the predicate " + predicate + ", added to the stack with the required preconditions");
                         stack.add(operator.copy());
-                        Set<Predicate> operatorPreconditions = operator.getPreconditions(currentState);
+                        PredicateSet operatorPreconditions = operator.getPreconditions(currentState);
                         stack.add(new PredicateSet(operatorPreconditions));
-                        i = operatorPreconditions.iterator();
+                        
+                        if (heuristicProvider == null) {
+                            i = operatorPreconditions.iterator();
+                        }
+                        else {
+                            i = heuristicProvider.heuristicSortPredicateSet(currentState, stack, operatorPreconditions).iterator();
+                        }
                         
                         while (i.hasNext()) {
                             stack.add(new Predicate(i.next()));

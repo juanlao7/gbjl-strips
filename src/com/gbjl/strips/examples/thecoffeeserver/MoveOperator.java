@@ -32,8 +32,8 @@ public class MoveOperator extends Operator {
     }
     
     @Override
-    public Set<Predicate> getPostconditions(Set<Predicate> state) {
-        Set<Predicate> postconditions = super.getPostconditions(state);
+    public PredicateSet getPostconditions(Set<Predicate> state) {
+        PredicateSet originalPostconditions = super.getPostconditions(state);
         Iterator<Predicate> i = state.iterator();
         
         while (i.hasNext()) {
@@ -42,12 +42,12 @@ public class MoveOperator extends Operator {
             if (predicate.getName().equals("Steps")) {
                 int currentSteps = Integer.parseInt(predicate.getParams().get(0).getName());
                 int distance = 1;       // TODO: calculate manhattan distance
-                postconditions.add(new Predicate("Steps", true, new String[]{(currentSteps) + ""}, true));
-                postconditions.add(new Predicate("Steps", false, new String[]{(currentSteps + distance) + ""}, true));
+                originalPostconditions.add(new Predicate("Steps", true, new String[]{(currentSteps) + ""}, true));
+                originalPostconditions.add(new Predicate("Steps", false, new String[]{(currentSteps + distance) + ""}, true));
                 break;
             }
         }
         
-        return postconditions;
+        return originalPostconditions;
     }
 }

@@ -12,13 +12,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Main implements HeuristicProvider, STRIPSLogger {
     private Set<Predicate> initialState;
@@ -38,6 +37,7 @@ public class Main implements HeuristicProvider, STRIPSLogger {
             }
             
             System.err.println("Error. " + e.getMessage());
+            e.printStackTrace();
             System.exit(1);
         }
     }
@@ -130,9 +130,64 @@ public class Main implements HeuristicProvider, STRIPSLogger {
 
     @Override
     public ArrayList<Predicate> heuristicSortPredicateSet(Set<Predicate> currentState, ArrayList<Element> currentStack, PredicateSet predicateSet) {
-        // TODO: fill this function
         // The first element of the array is the first element to be stacked in the stack.
-        return new ArrayList<>(predicateSet);
+        
+        if (currentStack.size() < 2) {
+            return predicateSet.toArrayList();
+        }
+        
+        Element topElementAfterTheSet = currentStack.get(currentStack.size() - 2);
+        
+        if (!(topElementAfterTheSet instanceof Operator)) {
+            return predicateSet.toArrayList();
+        }
+        
+        Operator operator = (Operator)topElementAfterTheSet;
+        
+        if (operator.getName().equals("Make")) {
+            ArrayList<Predicate> sortedPredicateList = new ArrayList<>(Arrays.asList(null, null, null));
+            Iterator<Predicate> i = predicateSet.iterator();
+            
+            while (i.hasNext()) {
+                Predicate predicate = i.next();
+                String predicateName = predicate.getName();
+                
+                if (predicateName.equals("Robot-location")) {
+                    sortedPredicateList.set(0, predicate);
+                }
+                else if (predicateName.equals("Machine")) {
+                    sortedPredicateList.set(1, predicate);
+                }
+                else if (predicateName.equals("Robot-free")) {
+                    sortedPredicateList.set(2, predicate);
+                }
+            }
+            
+            return sortedPredicateList;
+        }
+        else if (operator.getName().equals("Serve")) {
+            ArrayList<Predicate> sortedPredicateList = new ArrayList<>(Arrays.asList(null, null, null));
+            Iterator<Predicate> i = predicateSet.iterator();
+            
+            while (i.hasNext()) {
+                Predicate predicate = i.next();
+                String predicateName = predicate.getName();
+                
+                if (predicateName.equals("Robot-location")) {
+                    sortedPredicateList.set(0, predicate);
+                }
+                else if (predicateName.equals("Robot-loaded")) {
+                    sortedPredicateList.set(1, predicate);
+                }
+                else if (predicateName.equals("Petition")) {
+                    sortedPredicateList.set(2, predicate);
+                }
+            }
+            
+            return sortedPredicateList;
+        }
+        
+        return predicateSet.toArrayList();
     }
 
     @Override

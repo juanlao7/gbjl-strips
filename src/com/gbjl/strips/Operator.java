@@ -37,11 +37,11 @@ public class Operator implements Element {
         return this.name;
     }
     
-    public Set<Predicate> getPreconditions(Set<Predicate> state) {
+    public PredicateSet getPreconditions(Set<Predicate> state) {
         return new PredicateSet(this.preconditions);
     }
     
-    public Set<Predicate> getPostconditions(Set<Predicate> state) {
+    public PredicateSet getPostconditions(Set<Predicate> state) {
         return new PredicateSet(this.postconditions);
     }
     

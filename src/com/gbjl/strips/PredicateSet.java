@@ -1,5 +1,6 @@
 package com.gbjl.strips;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -17,6 +18,10 @@ public class PredicateSet extends HashSet<Predicate> implements Element {
         while (i.hasNext()) {
             this.add(new Predicate(i.next()));
         }
+    }
+    
+    public ArrayList<Predicate> toArrayList() {
+        return new ArrayList<>(this);
     }
     
     @Override
