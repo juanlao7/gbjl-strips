@@ -8,8 +8,9 @@ import com.gbjl.strips.Predicate;
 import com.gbjl.strips.PredicateSet;
 import com.gbjl.strips.STRIPSLogger;
 import com.gbjl.strips.Solver;
-import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,7 @@ public class Main implements HeuristicProvider, STRIPSLogger {
     private Set<Predicate> initialState;
     private Set<Predicate> goalState;
     private Set<Operator> operators;
+    private FileOutputStream output;
     
     public static void main(String[] args) {
         try {
@@ -37,17 +39,22 @@ public class Main implements HeuristicProvider, STRIPSLogger {
             }
             
             System.err.println("Error. " + e.getMessage());
+            
+            // TODO: do not show the stack trace
             e.printStackTrace();
+            
             System.exit(1);
         }
     }
     
     private Main(String[] args) throws Exception {
-        if (args.length != 1) {
-            throw new Exception("Wrong number of parameters. Usage: java -jar gbjl-strips.jar <input file>");
+        if (args.length != 2) {
+            throw new Exception("Wrong number of parameters. Usage: java -jar gbjl-strips.jar <input file> <output file>");
         }
         
-        InputStream inStream = new FileInputStream(new File(args[0]));
+        this.output = new FileOutputStream(args[1]);
+        
+        InputStream inStream = new FileInputStream(args[0]);
         Properties input = new Properties();
         input.load(inStream);
 
@@ -116,8 +123,7 @@ public class Main implements HeuristicProvider, STRIPSLogger {
     
     private void run() throws Exception {
         Solver solver = new Solver();
-        ArrayList<Operator> plan = solver.solve(this.operators, this.initialState, this.goalState, this, this);
-        System.out.println(plan);
+        solver.solve(this.operators, this.initialState, this.goalState, this, this);
     }
     
     private Set<Predicate> readState(Properties input, String key) throws Exception {
@@ -204,7 +210,12 @@ public class Main implements HeuristicProvider, STRIPSLogger {
 
     @Override
     public void logSTRIPS(String message) {
-        // TODO: write this to the output file.
+        try {
+            this.output.write(message.getBytes());
+        } catch (IOException ex) {
+        }
+        
+        // TODO: do not show the output on the stdout
         System.out.print(message);
     }
 }

@@ -139,7 +139,7 @@ public class Solver {
         }
         
         this.logln(logger, "STRIPS execution finished");
-        this.logCurrentPlan(logger, plan);
+        this.logln(logger, "Plan to archieve the goal: " + plan);
         
         return plan;
     }
