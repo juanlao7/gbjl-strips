@@ -78,11 +78,18 @@ public class Solver {
                     i = heuristicProvider.heuristicSortPredicateSet(currentState, stack, predicateSet).iterator();
                 }
                 
+                boolean setReinserted = false;
+                
                 while (i.hasNext()) {
                     Predicate predicate = i.next();
                     this.log(logger, "\t" + predicate);
                     
                     if (!currentState.contains(predicate)) {
+                        if (!setReinserted) {
+                            stack.add(element);
+                            setReinserted = true;
+                        }
+                        
                         this.logln(logger, " (not included in the current state, added to the stack)");
                         stack.add(new Predicate(predicate));
                     }
