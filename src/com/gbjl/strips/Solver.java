@@ -68,7 +68,6 @@ public class Solver {
             }
             else if (element instanceof PredicateSet) {
                 this.logln(logger, "(predicate set)");
-                this.logln(logger, "Analyzing predicates, one by one:");
                 PredicateSet predicateSet = (PredicateSet)element;
                 
                 if (heuristicProvider == null) {
@@ -78,6 +77,7 @@ public class Solver {
                     i = heuristicProvider.heuristicSortPredicateSet(currentState, stack, predicateSet).iterator();
                 }
                 
+                this.logln(logger, "Analyzing predicates, one by one:");
                 boolean setReinserted = false;
                 
                 while (i.hasNext()) {
@@ -112,7 +112,6 @@ public class Solver {
                         this.logln(logger, "Operator " + operator + " reaches the predicate " + predicate + ", added to the stack with the required preconditions");
                         stack.add(operator.copy());
                         PredicateSet operatorPreconditions = operator.getPreconditions(currentState);
-                        stack.add(new PredicateSet(operatorPreconditions));
                         
                         if (heuristicProvider == null) {
                             i = operatorPreconditions.iterator();
@@ -120,6 +119,8 @@ public class Solver {
                         else {
                             i = heuristicProvider.heuristicSortPredicateSet(currentState, stack, operatorPreconditions).iterator();
                         }
+                        
+                        stack.add(new PredicateSet(operatorPreconditions));
                         
                         while (i.hasNext()) {
                             stack.add(new Predicate(i.next()));
@@ -252,7 +253,7 @@ public class Solver {
             throw new InstantiationNotFoundSTRIPSException("Predicate \"" + partiallyInstantiatedPredicate + "\" cannot be instantiated in the state \"" + state + "\".");
         }
         
-        return heuristicProvider.heuristicBestInstantiation(state, stack, candidates);
+        return heuristicProvider.heuristicBestInstantiation(state, stack, partiallyInstantiatedPredicate, candidates);
     }
     
     private void logln(STRIPSLogger logger, String message) {

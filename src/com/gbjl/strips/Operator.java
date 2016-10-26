@@ -37,6 +37,10 @@ public class Operator implements Element {
         return this.name;
     }
     
+    public ArrayList<Param> getParams() {
+        return new ArrayList<>(this.params);
+    }
+    
     public PredicateSet getPreconditions(Set<Predicate> state) {
         return new PredicateSet(this.preconditions);
     }

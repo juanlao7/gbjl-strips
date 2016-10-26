@@ -24,6 +24,31 @@ public class PredicateSet extends HashSet<Predicate> implements Element {
         return new ArrayList<>(this);
     }
     
+    public PredicateSet getPredicatesByName(String name) {
+        PredicateSet result = new PredicateSet();
+        Iterator<Predicate> i = this.iterator();
+        
+        while (i.hasNext()) {
+            Predicate predicate = i.next();
+            
+            if (predicate.getName().equals(name)) {
+                result.add(new Predicate(predicate));
+            }
+        }
+        
+        return result;
+    }
+    
+    public ArrayList<Predicate> sortPredicatesByName(String[] nameOrder) {
+        ArrayList<Predicate> result = new ArrayList<>();
+        
+        for (int i = 0; i < nameOrder.length; ++i) {
+            result.addAll(this.getPredicatesByName(nameOrder[i]));
+        }
+        
+        return result;
+    }
+    
     @Override
     public void replaceParams(Map<String, Param> replacement) {
         Iterator<Predicate> i = this.iterator();

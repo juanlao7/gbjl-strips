@@ -42,7 +42,8 @@ public class MoveOperator extends Operator {
             if (predicate.getName().equals("Steps")) {
                 int currentSteps = Integer.parseInt(predicate.getParams().get(0).getName());
                 originalPostconditions.add(new Predicate("Steps", true, new String[]{(currentSteps) + ""}, true));
-                originalPostconditions.add(new Predicate("Steps", false, new String[]{(currentSteps + this.getManhattanDistance()) + ""}, true));
+                int manhattanDistance = getManhattanDistance(this.params.get(0), this.params.get(1));
+                originalPostconditions.add(new Predicate("Steps", false, new String[]{(currentSteps + manhattanDistance) + ""}, true));
                 break;
             }
         }
@@ -50,10 +51,7 @@ public class MoveOperator extends Operator {
         return originalPostconditions;
     }
     
-    private int getManhattanDistance() {
-        Param o1 = this.params.get(0);
-        Param o2 = this.params.get(1);
-        
+    public static int getManhattanDistance(Param o1, Param o2) {
         if (!o1.isInstantiated() || !o2.isInstantiated()) {
             return 0;
         }
