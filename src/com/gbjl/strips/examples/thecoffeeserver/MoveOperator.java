@@ -32,21 +32,18 @@ public class MoveOperator extends Operator {
     }
     
     @Override
-    public PredicateSet getPostconditions(Set<Predicate> state) {
-        PredicateSet originalPostconditions = super.getPostconditions(state);
-        Iterator<Predicate> i = state.iterator();
+    public PredicateSet getPostconditions(PredicateSet state) {
+        Predicate stepsPredicate = state.getPredicatesByName("Steps").iterator().next();
+        int currentSteps = Integer.parseInt(stepsPredicate.getParams().get(0).getName());
         
-        while (i.hasNext()) {
-            Predicate predicate = i.next();
-            
-            if (predicate.getName().equals("Steps")) {
-                int currentSteps = Integer.parseInt(predicate.getParams().get(0).getName());
-                originalPostconditions.add(new Predicate("Steps", true, new String[]{(currentSteps) + ""}, true));
-                int manhattanDistance = getManhattanDistance(this.params.get(0), this.params.get(1));
-                originalPostconditions.add(new Predicate("Steps", false, new String[]{(currentSteps + manhattanDistance) + ""}, true));
-                break;
-            }
-        }
+        PredicateSet originalPostconditions = super.getPostconditions(state);
+        
+        // ¬Steps(x)
+        originalPostconditions.add(new Predicate("Steps", true, new String[]{(currentSteps) + ""}, true));
+        
+        // Steps(x + d(o1,o2))
+        int manhattanDistance = getManhattanDistance(this.params.get(0), this.params.get(1));
+        originalPostconditions.add(new Predicate("Steps", false, new String[]{(currentSteps + manhattanDistance) + ""}, true));
         
         return originalPostconditions;
     }

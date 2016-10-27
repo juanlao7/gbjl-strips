@@ -146,6 +146,7 @@ public class Solver {
             }
         }
         
+        this.logState(logger, "Finish state", currentState);
         this.logln(logger, "STRIPS execution finished");
         this.logln(logger, "Plan to archieve the goal: " + plan);
         

@@ -1,9 +1,7 @@
 package com.gbjl.strips;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class Operator implements Element {
     private final String name;
@@ -41,11 +39,11 @@ public class Operator implements Element {
         return new ArrayList<>(this.params);
     }
     
-    public PredicateSet getPreconditions(Set<Predicate> state) {
+    public PredicateSet getPreconditions(PredicateSet state) {
         return new PredicateSet(this.preconditions);
     }
     
-    public PredicateSet getPostconditions(Set<Predicate> state) {
+    public PredicateSet getPostconditions(PredicateSet state) {
         return new PredicateSet(this.postconditions);
     }
     
