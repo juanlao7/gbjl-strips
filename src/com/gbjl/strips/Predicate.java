@@ -108,7 +108,7 @@ public class Predicate implements Element {
         boolean negated = false;
         int nameStart = 0;
         
-        if (representation.charAt(0) == '¬') {
+        if (representation.charAt(0) == '\u00ac') {      // ¬
             negated = true;
             nameStart = 1;
         }
@@ -125,7 +125,7 @@ public class Predicate implements Element {
     
     @Override
     public String toString() {
-        return ((this.negated) ? "¬" : "") + nameAndParamsToString(this.name, this.params, false);
+        return ((this.negated) ? '\u00ac' : "") + nameAndParamsToString(this.name, this.params, false);
     }
     
     public static String nameAndParamsToString(String name, ArrayList<Param> params, boolean addParenthesisWithNoParams) {
