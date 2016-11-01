@@ -97,7 +97,7 @@ def getState(s, title):
 			\\end{tabular}
 			\\\\
 			\\\\
-			""" + '; '.join(extraText) + """
+			""" + '; '.join(sorted(extraText)) + """
 			\\\\
 			""" + title + """
 			\\\\
