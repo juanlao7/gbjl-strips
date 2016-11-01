@@ -141,7 +141,7 @@ public class Solver {
                         j.next().replaceParams(replacement);
                     }
                     
-                    this.logState(logger, "Current state", currentState);
+                    this.logCurrentStack(logger, stack);
                 }
             }
         }
