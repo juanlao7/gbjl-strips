@@ -1,13 +1,17 @@
 \documentclass[12pt,a4paper,oneside]{article}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage[left=1.7cm,top=2.7cm,right=1.7cm,bottom=2.7cm]{geometry}
 
 \begin{document}
-	\begin{figure}
-		\centering
+	\newcommand{\plottwodee}[1]{
 		\begin{tikzpicture}
 			\begin{axis}[
-					xlabel=Petitions,
+					xlabel={#1},
 					ylabel=Steps,
 				]
 				\addplot[
@@ -15,59 +19,62 @@
 					only marks,
 				]
 				table[
-					x=Petitions,
+					x=#1,
 					y=Steps,
-					col sep=comma
+					col sep=comma,
 				]{results.csv};
 			\end{axis}
 		\end{tikzpicture}
+	}
+	
+	\begin{figure}
+		\centering
+		\plottwodee{Petitions}
 		\caption{Relation between petitions and steps}
 		\label{fig:2d-petitions}
 	\end{figure}
 
 	\begin{figure}
 		\centering
-		\begin{tikzpicture}
-			\begin{axis}[
-					xlabel=Machines,
-					ylabel=Steps,
-				]
-				\addplot[
-					scatter,
-					only marks,
-				]
-				table[
-					x=Machines,
-					y=Steps,
-					col sep=comma
-				]{results.csv};
-			\end{axis}
-		\end{tikzpicture}
+		\plottwodee{Machines}
 		\caption{Relation between machines and steps}
-		\label{fig:2d-machines}
+		\label{fig:2d-petitions}
 	\end{figure}
+
+	\newcommand{\plotthreedee}[2]{
+		\begin{axis}[
+				scale=0.75,
+				view={#2}{#1},
+				xlabel=Petitions,
+				ylabel=Machines,
+				zlabel=Steps,
+			]
+			\addplot3[
+				scatter,
+				only marks,
+			]
+			table[
+				x=Petitions,
+				y=Machines,
+				z=Steps,
+				col sep=comma,
+			]{results.csv};
+		\end{axis}
+	}
 
 	\begin{figure}
 		\centering
-		\begin{tikzpicture}
-			\begin{axis}[
-					xlabel=Petitions,
-					ylabel=Machines,
-					zlabel=Steps,
-				]
-				\addplot3[
-					scatter,
-					only marks,
-				]
-				table[
-					x=Petitions,
-					y=Machines,
-					z=Steps,
-					col sep=comma
-				]{results.csv};
-			\end{axis}
-		\end{tikzpicture}
+		\begin{subfigure}
+			\begin{tikzpicture}
+				\plotthreedee{20}{70}
+			\end{tikzpicture}
+		\end{subfigure}
+		\begin{subfigure}
+			\begin{tikzpicture}
+				\plotthreedee{45}{20}
+			\end{tikzpicture}
+		\end{subfigure}
 		\caption{Relation between petitions, machines and steps}
-		\label{fig:3d}
+		\label{fig:3d-a}
 	\end{figure}
 \end{document}
