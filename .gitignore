@@ -1,3 +1,7 @@
 /nbproject/private/
 /build/
 /out/
+*.aux
+docs/thecoffeeserver/plot.log
+docs/thecoffeeserver/plot.pdf
+docs/thecoffeeserver/plot.synctex.gz

@@ -4,8 +4,14 @@ i="0"
 
 while [ $i -lt $1 ]
 do
-	PETITIONS=$(( ( RANDOM % 18 )  + 1 ))
-	MACHINES=$(( ( RANDOM % 18 )  + 1 ))
+	PETITIONS=$(( ( RANDOM % 36 )  + 1 ))
+	MACHINES=$(( ( RANDOM % 36 )  + 1 ))
+
+	if [ $[$PETITIONS+$MACHINES] -gt 36 ]
+	then
+		continue	
+	fi
+
 	python case_generator.py $PETITIONS $MACHINES > ../../out/temporal_random_case.txt
 	java -jar ../../out/thecoffeeserver.jar ../../out/temporal_random_case.txt ../../out/temporal_random_result.txt
 

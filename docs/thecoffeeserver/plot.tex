@@ -1,0 +1,73 @@
+\documentclass[12pt,a4paper,oneside]{article}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\begin{document}
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+					xlabel=Petitions,
+					ylabel=Steps,
+				]
+				\addplot[
+					scatter,
+					only marks,
+				]
+				table[
+					x=Petitions,
+					y=Steps,
+					col sep=comma
+				]{results.csv};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Relation between petitions and steps}
+		\label{fig:2d-petitions}
+	\end{figure}
+
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+					xlabel=Machines,
+					ylabel=Steps,
+				]
+				\addplot[
+					scatter,
+					only marks,
+				]
+				table[
+					x=Machines,
+					y=Steps,
+					col sep=comma
+				]{results.csv};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Relation between machines and steps}
+		\label{fig:2d-machines}
+	\end{figure}
+
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+					xlabel=Petitions,
+					ylabel=Machines,
+					zlabel=Steps,
+				]
+				\addplot3[
+					scatter,
+					only marks,
+				]
+				table[
+					x=Petitions,
+					y=Machines,
+					z=Steps,
+					col sep=comma
+				]{results.csv};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Relation between petitions, machines and steps}
+		\label{fig:3d}
+	\end{figure}
+\end{document}
