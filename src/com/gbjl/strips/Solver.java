@@ -196,7 +196,9 @@ public class Solver {
         }
         
         if (candidates.isEmpty()) {
-            throw new OperatorNotFoundSTRIPSException("Predicate \"" + desiredCondition + "\" cannot be reached with the given operators.");
+            String message = "Predicate \"" + desiredCondition + "\" cannot be reached with the given operators.";
+            logger.logSTRIPS("Error. " + message);
+            throw new OperatorNotFoundSTRIPSException(message);
         }
         
         return heuristicProvider.heuristicBestOperator(state, stack, candidates);
@@ -251,7 +253,9 @@ public class Solver {
         }
         
         if (candidates.isEmpty()) {
-            throw new InstantiationNotFoundSTRIPSException("Predicate \"" + partiallyInstantiatedPredicate + "\" cannot be instantiated in the state \"" + state + "\".");
+            String message = "Predicate \"" + partiallyInstantiatedPredicate + "\" cannot be instantiated in the state \"" + state + "\".";
+            logger.logSTRIPS("Error. " + message);
+            throw new InstantiationNotFoundSTRIPSException(message);
         }
         
         return heuristicProvider.heuristicBestInstantiation(state, stack, partiallyInstantiatedPredicate, candidates);

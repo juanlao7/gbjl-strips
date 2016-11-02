@@ -31,17 +31,17 @@ public class Main implements HeuristicProvider, STRIPSLogger {
             Main main = new Main(args);
             main.run();
         } catch (Exception e) {
-            System.out.flush();
+            /*System.out.flush();
             
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-            }
+            }*/
             
             System.err.println("Error. " + e.getMessage());
             
             // TODO: do not show the stack trace
-            e.printStackTrace();
+            //e.printStackTrace();
             
             System.exit(1);
         }
@@ -281,6 +281,6 @@ public class Main implements HeuristicProvider, STRIPSLogger {
         }
         
         // TODO: do not show the output on the stdout
-        System.out.print(message);
+        //System.out.print(message);
     }
 }
