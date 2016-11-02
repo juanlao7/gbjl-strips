@@ -215,27 +215,6 @@ public class Main implements HeuristicProvider, STRIPSLogger {
         return sortedPredicateList;
     }    
  
-// I have written a general expression for all of thhis above. I have left this code here 
-// in case you prefer it instead of the general expression (probably less efficient but much more compact)
-    
-//        Element topElementAfterTheSet = currentStack.get(currentStack.size() - 1);
-//        
-//        if (!(topElementAfterTheSet instanceof Operator)) {
-//            return predicateSet.toArrayList();
-//        }
-//        
-//        Operator operator = (Operator)topElementAfterTheSet;
-//        
-//        if (operator.getName().equals("Make")) {
-//            return predicateSet.sortPredicatesByName(new String[]{"Robot-location", "Machine", "Robot-free"});
-//        }
-//        else if (operator.getName().equals("Serve")) {
-//            return predicateSet.sortPredicatesByName(new String[]{"Robot-location", "Robot-loaded", "Petition"});
-//        }
-//        
-//        return predicateSet.toArrayList();
-//    }
-
     @Override
     public Operator heuristicBestOperator(PredicateSet currentState, ArrayList<Element> currentStack, Set<Operator> operators) {
         /*
