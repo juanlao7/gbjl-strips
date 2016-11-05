@@ -213,14 +213,14 @@ public class Main implements HeuristicProvider, STRIPSLogger {
     
     private Predicate findNearest(PredicateSet servedPredicates, Param referencePosition) {
         Iterator<Predicate> i = servedPredicates.iterator();
-        Predicate nextPredicate = i.next();
-        int minDistance = MoveOperator.getManhattanDistance(referencePosition, nextPredicate.getParams().get(0));
+        Predicate nextPredicate = null;
+        int minDistance = -1;
 
         while (i.hasNext()) {
             Predicate predicate = i.next();
             int distance = MoveOperator.getManhattanDistance(referencePosition, predicate.getParams().get(0));
             
-            if (distance < minDistance) {
+            if (minDistance == -1 || distance < minDistance) {
                 minDistance = distance;
                 nextPredicate = predicate;
             }
