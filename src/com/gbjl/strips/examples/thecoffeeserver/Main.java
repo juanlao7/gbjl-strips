@@ -153,8 +153,46 @@ public class Main implements HeuristicProvider, STRIPSLogger {
         ArrayList<Predicate> firstServedPredicates = new ArrayList<>();
         ArrayList<Predicate> lastServedPredicates = new ArrayList<>();
         
-        // We get the initial and final positions of the robot
+        // We get the initial position of the robot
         Param initialPosition = currentState.getPredicatesByName("Robot-location").iterator().next().getParams().get(0);
+        
+        // We check whether a final position is not stated in the goal state
+        if (predicateSet.getPredicatesByName("Robot-location").isEmpty()){
+            // When the final position is not stated in the goal state, we order the 
+            // Served predicates so that the first one is the closest to the initial position,
+            // the second one the closest to the first Served predicate added, and so on.
+            // We only create the sequence starting from the initial position.
+            for (int i = 0; !servedPredicates.isEmpty() ; i++){
+                Iterator<Predicate> j = servedPredicates.iterator();
+                Predicate nextPredicate = j.next();
+                Param nextPosition = nextPredicate.getParams().get(0);
+                int minDistance = MoveOperator.getManhattanDistance(initialPosition, nextPosition);
+
+                while(j.hasNext()){
+                    Predicate predicate = j.next();
+                    Param position = predicate.getParams().get(0);
+                    int distance = MoveOperator.getManhattanDistance(initialPosition, position);
+                    if (distance < minDistance){
+                        minDistance = distance;
+                        nextPosition = position;
+                        nextPredicate = predicate;
+                    }
+                }
+                initialPosition = nextPosition;
+                firstServedPredicates.add(nextPredicate);
+                servedPredicates.remove(nextPredicate);
+            }  
+            // First we add all possible predicates that are not "Served" in the correct order
+            sortedPredicateList.addAll(predicateSet.sortPredicatesByName(new String[]{"Petition", "Robot-loaded"}));
+            // Finally, we add the Served predicates in the correct order
+            // To obtain the correct order, we must reverse the generated arraylist
+            Collections.reverse(firstServedPredicates);
+            sortedPredicateList.addAll(firstServedPredicates);
+
+            return sortedPredicateList;
+        }
+        
+        // We get the final position of the robot
         Param finalPosition = predicateSet.getPredicatesByName("Robot-location").iterator().next().getParams().get(0);
         
         for (int i = 0; !servedPredicates.isEmpty() ; i++){
