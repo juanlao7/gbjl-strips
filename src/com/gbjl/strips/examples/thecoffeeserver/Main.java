@@ -75,8 +75,13 @@ public class Main implements HeuristicProvider, STRIPSLogger {
             this.initialState.add(new Predicate("Steps", false, new String[]{"0"}, true));
         }
         
-        // When BRUTEFORCE == true, this program finds the optimal solution using a bruteforce algorithm. Then, it prints the number of required steps to reach it.
-        // This code was used for the redaction of the results table in the final paper, where we compared our solution with the optimal one.
+        /*
+         * When BRUTEFORCE == true, this program finds the optimal solution using a bruteforce
+         * algorithm. Then, it prints the number of required steps to reach it.
+         * This code was used for the redaction of the results table in the final paper, where
+         * we compared our solution with the optimal one.
+         */
+        
         if (BRUTEFORCE) {
             Param initialPosition = this.initialState.getPredicatesByName("Robot-location").iterator().next().getParams().get(0);
             Param finalPosition = null;
