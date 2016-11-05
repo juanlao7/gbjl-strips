@@ -13,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -33,18 +32,7 @@ public class Main implements HeuristicProvider, STRIPSLogger {
             Main main = new Main(args);
             main.run();
         } catch (Exception e) {
-            /*System.out.flush();
-            
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-            }*/
-            
             System.err.println("Error. " + e.getMessage());
-            
-            // TODO: do not show the stack trace
-            //e.printStackTrace();
-            
             System.exit(1);
         }
     }
@@ -87,6 +75,8 @@ public class Main implements HeuristicProvider, STRIPSLogger {
             this.initialState.add(new Predicate("Steps", false, new String[]{"0"}, true));
         }
         
+        // When BRUTEFORCE == true, this program finds the optimal solution using a bruteforce algorithm. Then, it prints the number of required steps to reach it.
+        // This code was used for the redaction of the results table in the final paper, where we compared our solution with the optimal one.
         if (BRUTEFORCE) {
             Param initialPosition = this.initialState.getPredicatesByName("Robot-location").iterator().next().getParams().get(0);
             Param finalPosition = null;
@@ -152,93 +142,87 @@ public class Main implements HeuristicProvider, STRIPSLogger {
     
     @Override
     public ArrayList<Predicate> heuristicSortPredicateSet(PredicateSet currentState, ArrayList<Element> currentStack, PredicateSet predicateSet) {
-        // We are sorting the preconditions of a cetain operator
+        // We are sorting the preconditions of a cetain operator.
+        
         if (currentStack.size() > 1){
             return predicateSet.sortPredicatesByName(new String[]{"Steps", "Robot-location", "Machine", "Robot-loaded", "Robot-free", "Petition"});
         }
         
-        // We are sorting the goal state
-        // The first element of the array is the first element to be stacked in the stack.
+        /*
+         * We are sorting the goal state.
+         * The first element of the array is the first element to be stacked in the stack.
+         */
         ArrayList<Predicate> sortedPredicateList = new ArrayList<>(predicateSet.size());
         PredicateSet servedPredicates = predicateSet.getPredicatesByName("Served");
         
-        // We create two array list. One will be filled with the sequence of nearest 
-        // "served" offices starting from the initial position, and the other with an 
-        // analogous sequence starting from the final position
-        
+        /*
+         * We create two array list. One will be filled with the sequence of nearest 
+         * "served" offices starting from the initial position, and the other with an 
+         * analogous sequence starting from the final position.
+         */
         ArrayList<Predicate> firstServedPredicates = new ArrayList<>();
         ArrayList<Predicate> lastServedPredicates = new ArrayList<>();
         
         // We get the initial position of the robot
         Param initialPosition = currentState.getPredicatesByName("Robot-location").iterator().next().getParams().get(0);
         
-        // We check whether the final position is not stated in the goal state
-        boolean isFinalLocationNotDefined = predicateSet.getPredicatesByName("Robot-location").isEmpty();
-        
         // We get the final position of the robot if possible
-        Param finalPosition = null;
-        if (!isFinalLocationNotDefined){
-           finalPosition = predicateSet.getPredicatesByName("Robot-location").iterator().next().getParams().get(0);
-        }
+        PredicateSet finalRobotLocations = predicateSet.getPredicatesByName("Robot-location");
+        Param finalPosition = (finalRobotLocations.isEmpty()) ? null : finalRobotLocations.iterator().next().getParams().get(0);
         
-        for (int i = 0; !servedPredicates.isEmpty() ; i++){
-            // Each even step (or all if the final location is not defined) 
-            // we will add an element to the list of first served predicates
-            // finding the nearest one to the last element of that list.
-            // Each odd step (if final location is defined) we do the same with thelist of last served predicates
-            // In both cases, we delete the selected element from servedPredicates list
-            if (i % 2 == 0 || isFinalLocationNotDefined){
-                Iterator<Predicate> j = servedPredicates.iterator();
-                Predicate nextPredicate = j.next();
-                Param nextPosition = nextPredicate.getParams().get(0);
-                int minDistance = MoveOperator.getManhattanDistance(initialPosition, nextPosition);
-
-                while(j.hasNext()){
-                    Predicate predicate = j.next();
-                    Param position = predicate.getParams().get(0);
-                    int distance = MoveOperator.getManhattanDistance(initialPosition, position);
-                    if (distance < minDistance){
-                        minDistance = distance;
-                        nextPosition = position;
-                        nextPredicate = predicate;
-                    }
-                }
-                initialPosition = nextPosition;
-                firstServedPredicates.add(nextPredicate);
-                servedPredicates.remove(nextPredicate);
-            } else {
-                Iterator<Predicate> j = servedPredicates.iterator();
-                Predicate nextPredicate = j.next();
-                Param nextPosition = nextPredicate.getParams().get(0);
-                int minDistance = MoveOperator.getManhattanDistance(finalPosition, nextPosition);
-
-                while(j.hasNext()){
-                    Predicate predicate = j.next();
-                    Param position = predicate.getParams().get(0);
-                    int distance = MoveOperator.getManhattanDistance(finalPosition, position);
-                    if (distance < minDistance){
-                        minDistance = distance;
-                        nextPosition = position;
-                        nextPredicate = predicate;
-                    }
-                }
-                finalPosition = nextPosition;
-                lastServedPredicates.add(nextPredicate);
-                servedPredicates.remove(nextPredicate);
+        for (int i = 0; !servedPredicates.isEmpty(); i++) {
+            /*
+             * Each even step (or all if the final location is not defined)
+             * we will add an element to the list of first served predicates
+             * finding the nearest one to the last element of that list.
+             * Each odd step (if final location is defined) we do the same with thelist of last served predicates.
+             * In both cases, we delete the selected element from servedPredicates list.
+             */
+            Predicate nextPredicate;
+            
+            if (i % 2 == 0 || finalPosition == null) {
+                nextPredicate = this.findNearest(servedPredicates, initialPosition);
+                initialPosition = nextPredicate.getParams().get(0);
+                firstServedPredicates.add(0, nextPredicate);
             }
+            else {
+                nextPredicate = this.findNearest(servedPredicates, finalPosition);
+                finalPosition = nextPredicate.getParams().get(0);
+                lastServedPredicates.add(nextPredicate);
+            }
+            
+            servedPredicates.remove(nextPredicate);
         }
         
         // First we add all possible predicates that are not "Served" in the correct order
         sortedPredicateList.addAll(predicateSet.sortPredicatesByName(new String[]{"Petition", "Robot-location", "Robot-loaded"}));
+        
         // Then we add those served predicates that have been chosen from the final position
         sortedPredicateList.addAll(lastServedPredicates);
+        
         // Finally, we add the ones chosen from the initial position in the correct order
-        // To obtain the correct order, we must reverse the arraylist
-        Collections.reverse(firstServedPredicates);
         sortedPredicateList.addAll(firstServedPredicates);
 
         return sortedPredicateList;
-    }    
+    }
+    
+    private Predicate findNearest(PredicateSet servedPredicates, Param referencePosition) {
+        Iterator<Predicate> i = servedPredicates.iterator();
+        Predicate nextPredicate = i.next();
+        int minDistance = MoveOperator.getManhattanDistance(referencePosition, nextPredicate.getParams().get(0));
+
+        while (i.hasNext()) {
+            Predicate predicate = i.next();
+            int distance = MoveOperator.getManhattanDistance(referencePosition, predicate.getParams().get(0));
+            
+            if (distance < minDistance) {
+                minDistance = distance;
+                nextPredicate = predicate;
+            }
+        }
+        
+        return nextPredicate;
+    }
  
     @Override
     public Operator heuristicBestOperator(PredicateSet currentState, ArrayList<Element> currentStack, Set<Operator> operators) {
@@ -304,9 +288,6 @@ public class Main implements HeuristicProvider, STRIPSLogger {
             this.output.write(message.getBytes());
         } catch (IOException ex) {
         }
-        
-        // TODO: do not show the output on the stdout
-        //System.out.print(message);
     }
     
     private int bruteforce(Param position, Param finalPosition, Set<Predicate> petitions, Set<Predicate> machines) {
