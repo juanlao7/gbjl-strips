@@ -1,0 +1,2463 @@
+\subsubsection{State evolution}
+
+		\begin{multicols}{3}
+		\centering
+		\tiny
+	
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{red}{P(3)}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{red}{P(2)}	&		&		&	\textcolor{blue}{R}	&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(0)
+			\\
+			Initial state
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\begin{tabular}[c]{@{}l@{}}\textcolor{brown}{M(2)}\\\textcolor{blue}{R}\end{tabular} \\ \hline
+				\textcolor{red}{P(3)}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{red}{P(2)}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(3)
+			\\
+			Intermediate state 1
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\begin{tabular}[c]{@{}l@{}}\textcolor{brown}{M(2)}\\\textcolor{blue}{R}\end{tabular} \\ \hline
+				\textcolor{red}{P(3)}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{red}{P(2)}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-loaded(2); Steps(3)
+			\\
+			Intermediate state 2
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{red}{P(3)}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\begin{tabular}[c]{@{}l@{}}\textcolor{red}{P(2)}\\\textcolor{blue}{R}\end{tabular}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-loaded(2); Steps(9)
+			\\
+			Intermediate state 3
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{red}{P(3)}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\begin{tabular}[c]{@{}l@{}}\textcolor{blue}{R}\\\textcolor{green}{S}\end{tabular}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(9)
+			\\
+			Intermediate state 4
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{red}{P(3)}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\begin{tabular}[c]{@{}l@{}}\textcolor{brown}{M(3)}\\\textcolor{blue}{R}\end{tabular}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(10)
+			\\
+			Intermediate state 5
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{red}{P(3)}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\begin{tabular}[c]{@{}l@{}}\textcolor{brown}{M(3)}\\\textcolor{blue}{R}\end{tabular}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-loaded(3); Steps(10)
+			\\
+			Intermediate state 6
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\begin{tabular}[c]{@{}l@{}}\textcolor{red}{P(3)}\\\textcolor{blue}{R}\end{tabular}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-loaded(3); Steps(11)
+			\\
+			Intermediate state 7
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\begin{tabular}[c]{@{}l@{}}\textcolor{blue}{R}\\\textcolor{green}{S}\end{tabular}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(11)
+			\\
+			Intermediate state 8
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\begin{tabular}[c]{@{}l@{}}\textcolor{brown}{M(1)}\\\textcolor{blue}{R}\end{tabular} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(19)
+			\\
+			Intermediate state 9
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\begin{tabular}[c]{@{}l@{}}\textcolor{brown}{M(1)}\\\textcolor{blue}{R}\end{tabular} \\ \hline
+					&	\textcolor{red}{P(1)}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-loaded(1); Steps(19)
+			\\
+			Intermediate state 10
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\begin{tabular}[c]{@{}l@{}}\textcolor{red}{P(1)}\\\textcolor{blue}{R}\end{tabular}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-loaded(1); Steps(24)
+			\\
+			Intermediate state 11
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\begin{tabular}[c]{@{}l@{}}\textcolor{blue}{R}\\\textcolor{green}{S}\end{tabular}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(24)
+			\\
+			Intermediate state 12
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\begin{tabular}[c]{@{}l@{}}\textcolor{brown}{M(1)}\\\textcolor{blue}{R}\end{tabular} \\ \hline
+					&	\textcolor{green}{S}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(29)
+			\\
+			Intermediate state 13
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\begin{tabular}[c]{@{}l@{}}\textcolor{brown}{M(1)}\\\textcolor{blue}{R}\end{tabular} \\ \hline
+					&	\textcolor{green}{S}	&	\textcolor{red}{P(1)}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-loaded(1); Steps(29)
+			\\
+			Intermediate state 14
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{green}{S}	&	\begin{tabular}[c]{@{}l@{}}\textcolor{blue}{R}\\\textcolor{red}{P(1)}\end{tabular}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-loaded(1); Steps(33)
+			\\
+			Intermediate state 15
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{green}{S}	&	\begin{tabular}[c]{@{}l@{}}\textcolor{blue}{R}\\\textcolor{green}{S}\end{tabular}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(33)
+			\\
+			Intermediate state 16
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{green}{S}	&	\textcolor{green}{S}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\begin{tabular}[c]{@{}l@{}}\textcolor{brown}{M(2)}\\\textcolor{blue}{R}\end{tabular} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(37)
+			\\
+			Intermediate state 17
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{red}{P(2)}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{green}{S}	&	\textcolor{green}{S}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\begin{tabular}[c]{@{}l@{}}\textcolor{brown}{M(2)}\\\textcolor{blue}{R}\end{tabular} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-loaded(2); Steps(37)
+			\\
+			Intermediate state 18
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\begin{tabular}[c]{@{}l@{}}\textcolor{blue}{R}\\\textcolor{red}{P(2)}\end{tabular}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{green}{S}	&	\textcolor{green}{S}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-loaded(2); Steps(43)
+			\\
+			Intermediate state 19
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\begin{tabular}[c]{@{}l@{}}\textcolor{blue}{R}\\\textcolor{green}{S}\end{tabular}	&		&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(1)} \\ \hline
+					&	\textcolor{green}{S}	&	\textcolor{green}{S}	&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+					&		&		&		&		&	\textcolor{brown}{M(2)} \\ \hline
+				\textcolor{green}{S}	&		&		&	\textcolor{brown}{M(3)}	&		&	 \\ \hline
+				\textcolor{brown}{M(3)}	&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Robot-free; Steps(43)
+			\\
+			Final state
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+					&		&	\textcolor{green}{S}	&		&		&	 \\ \hline
+					&		&		&		&		&	 \\ \hline
+					&	\textcolor{green}{S}	&	\textcolor{green}{S}	&		&		&	 \\ \hline
+					&		&		&		&		&	 \\ \hline
+				\textcolor{green}{S}	&		&		&		&		&	 \\ \hline
+					&	\textcolor{green}{S}	&		&		&		&	 \\ \hline
+			\end{tabular}
+			\\
+			\\
+			
+			\\
+			Goal state
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+		\end{multicols}
+	
+\subsubsection{Stack evolution}
+
+		\begin{multicols}{3}
+		\centering
+		\tiny
+	
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Served(o32) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#1
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Petition(o32,[n]) \\ \hline
+				Robot-loaded([n]) \\ \hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL([n]), P(o32,[n])\} \\ \hline
+				Serve(o32,[n]) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#2
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-loaded(2) \\ \hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#3
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-free \\ \hline
+				Machine([o],2) \\ \hline
+				Robot-location([o]) \\ \hline
+				\{R([o]), RF, M([o],2)\} \\ \hline
+				Make([o],2) \\ \hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#4
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Machine([o],2) \\ \hline
+				Robot-location([o]) \\ \hline
+				\{R([o]), RF, M([o],2)\} \\ \hline
+				Make([o],2) \\ \hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#5
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location(o24) \\ \hline
+				\{R(o24), RF, M(o24,2)\} \\ \hline
+				Make(o24,2) \\ \hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#6
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location([o1]) \\ \hline
+				\{R([o1])\} \\ \hline
+				Move([o1],o24) \\ \hline
+				\{R(o24), RF, M(o24,2)\} \\ \hline
+				Make(o24,2) \\ \hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#7
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o35)\} \\ \hline
+				Move(o35,o24) \\ \hline
+				\{R(o24), RF, M(o24,2)\} \\ \hline
+				Make(o24,2) \\ \hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#8
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Move(o35,o24) \\ \hline
+				\{R(o24), RF, M(o24,2)\} \\ \hline
+				Make(o24,2) \\ \hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#9
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o24), RF, M(o24,2)\} \\ \hline
+				Make(o24,2) \\ \hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#10
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Make(o24,2) \\ \hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#11
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location(o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#12
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location([o1]) \\ \hline
+				\{R([o1])\} \\ \hline
+				Move([o1],o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#13
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o24)\} \\ \hline
+				Move(o24,o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#14
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Move(o24,o32) \\ \hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#15
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o32), RL(2), P(o32,2)\} \\ \hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#16
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Serve(o32,2) \\ \hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#17
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Served(o25) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#18
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Petition(o25,[n]) \\ \hline
+				Robot-loaded([n]) \\ \hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,[n]), RL([n])\} \\ \hline
+				Serve(o25,[n]) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#19
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-loaded(3) \\ \hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#20
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-free \\ \hline
+				Machine([o],3) \\ \hline
+				Robot-location([o]) \\ \hline
+				\{R([o]), RF, M([o],3)\} \\ \hline
+				Make([o],3) \\ \hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#21
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Machine([o],3) \\ \hline
+				Robot-location([o]) \\ \hline
+				\{R([o]), RF, M([o],3)\} \\ \hline
+				Make([o],3) \\ \hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#22
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location(o31) \\ \hline
+				\{R(o31), RF, M(o31,3)\} \\ \hline
+				Make(o31,3) \\ \hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#23
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location([o1]) \\ \hline
+				\{R([o1])\} \\ \hline
+				Move([o1],o31) \\ \hline
+				\{R(o31), RF, M(o31,3)\} \\ \hline
+				Make(o31,3) \\ \hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#24
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o32)\} \\ \hline
+				Move(o32,o31) \\ \hline
+				\{R(o31), RF, M(o31,3)\} \\ \hline
+				Make(o31,3) \\ \hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#25
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Move(o32,o31) \\ \hline
+				\{R(o31), RF, M(o31,3)\} \\ \hline
+				Make(o31,3) \\ \hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#26
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o31), RF, M(o31,3)\} \\ \hline
+				Make(o31,3) \\ \hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#27
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Make(o31,3) \\ \hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#28
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location(o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#29
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location([o1]) \\ \hline
+				\{R([o1])\} \\ \hline
+				Move([o1],o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#30
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o31)\} \\ \hline
+				Move(o31,o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#31
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Move(o31,o25) \\ \hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#32
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o25), P(o25,3), RL(3)\} \\ \hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#33
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Serve(o25,3) \\ \hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#34
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Served(o14) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#35
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Petition(o14,[n]) \\ \hline
+				Robot-loaded([n]) \\ \hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,[n]), RL([n])\} \\ \hline
+				Serve(o14,[n]) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#36
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-loaded(1) \\ \hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#37
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-free \\ \hline
+				Machine([o],1) \\ \hline
+				Robot-location([o]) \\ \hline
+				\{M([o],1), R([o]), RF\} \\ \hline
+				Make([o],1) \\ \hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#38
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Machine([o],1) \\ \hline
+				Robot-location([o]) \\ \hline
+				\{M([o],1), R([o]), RF\} \\ \hline
+				Make([o],1) \\ \hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#39
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location(o12) \\ \hline
+				\{M(o12,1), R(o12), RF\} \\ \hline
+				Make(o12,1) \\ \hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#40
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location([o1]) \\ \hline
+				\{R([o1])\} \\ \hline
+				Move([o1],o12) \\ \hline
+				\{M(o12,1), R(o12), RF\} \\ \hline
+				Make(o12,1) \\ \hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#41
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o25)\} \\ \hline
+				Move(o25,o12) \\ \hline
+				\{M(o12,1), R(o12), RF\} \\ \hline
+				Make(o12,1) \\ \hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#42
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Move(o25,o12) \\ \hline
+				\{M(o12,1), R(o12), RF\} \\ \hline
+				Make(o12,1) \\ \hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#43
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{M(o12,1), R(o12), RF\} \\ \hline
+				Make(o12,1) \\ \hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#44
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Make(o12,1) \\ \hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#45
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location(o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#46
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location([o1]) \\ \hline
+				\{R([o1])\} \\ \hline
+				Move([o1],o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#47
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o12)\} \\ \hline
+				Move(o12,o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#48
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Move(o12,o14) \\ \hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#49
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o14), P(o14,1), RL(1)\} \\ \hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#50
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Serve(o14,1) \\ \hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#51
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Served(o15) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#52
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Petition(o15,[n]) \\ \hline
+				Robot-loaded([n]) \\ \hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,[n]), R(o15), RL([n])\} \\ \hline
+				Serve(o15,[n]) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#53
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-loaded(1) \\ \hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#54
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-free \\ \hline
+				Machine([o],1) \\ \hline
+				Robot-location([o]) \\ \hline
+				\{M([o],1), R([o]), RF\} \\ \hline
+				Make([o],1) \\ \hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#55
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Machine([o],1) \\ \hline
+				Robot-location([o]) \\ \hline
+				\{M([o],1), R([o]), RF\} \\ \hline
+				Make([o],1) \\ \hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#56
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location(o12) \\ \hline
+				\{M(o12,1), R(o12), RF\} \\ \hline
+				Make(o12,1) \\ \hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#57
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location([o1]) \\ \hline
+				\{R([o1])\} \\ \hline
+				Move([o1],o12) \\ \hline
+				\{M(o12,1), R(o12), RF\} \\ \hline
+				Make(o12,1) \\ \hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#58
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o14)\} \\ \hline
+				Move(o14,o12) \\ \hline
+				\{M(o12,1), R(o12), RF\} \\ \hline
+				Make(o12,1) \\ \hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#59
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Move(o14,o12) \\ \hline
+				\{M(o12,1), R(o12), RF\} \\ \hline
+				Make(o12,1) \\ \hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#60
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{M(o12,1), R(o12), RF\} \\ \hline
+				Make(o12,1) \\ \hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#61
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Make(o12,1) \\ \hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#62
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location(o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#63
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location([o1]) \\ \hline
+				\{R([o1])\} \\ \hline
+				Move([o1],o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#64
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o12)\} \\ \hline
+				Move(o12,o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#65
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Move(o12,o15) \\ \hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#66
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{P(o15,1), R(o15), RL(1)\} \\ \hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#67
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Serve(o15,1) \\ \hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#68
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Served(o3) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#69
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Petition(o3,[n]) \\ \hline
+				Robot-loaded([n]) \\ \hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL([n]), P(o3,[n])\} \\ \hline
+				Serve(o3,[n]) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#70
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-loaded(2) \\ \hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#71
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-free \\ \hline
+				Machine([o],2) \\ \hline
+				Robot-location([o]) \\ \hline
+				\{R([o]), RF, M([o],2)\} \\ \hline
+				Make([o],2) \\ \hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#72
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Machine([o],2) \\ \hline
+				Robot-location([o]) \\ \hline
+				\{R([o]), RF, M([o],2)\} \\ \hline
+				Make([o],2) \\ \hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#73
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location(o24) \\ \hline
+				\{R(o24), RF, M(o24,2)\} \\ \hline
+				Make(o24,2) \\ \hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#74
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location([o1]) \\ \hline
+				\{R([o1])\} \\ \hline
+				Move([o1],o24) \\ \hline
+				\{R(o24), RF, M(o24,2)\} \\ \hline
+				Make(o24,2) \\ \hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#75
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o15)\} \\ \hline
+				Move(o15,o24) \\ \hline
+				\{R(o24), RF, M(o24,2)\} \\ \hline
+				Make(o24,2) \\ \hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#76
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Move(o15,o24) \\ \hline
+				\{R(o24), RF, M(o24,2)\} \\ \hline
+				Make(o24,2) \\ \hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#77
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o24), RF, M(o24,2)\} \\ \hline
+				Make(o24,2) \\ \hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#78
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Make(o24,2) \\ \hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#79
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location(o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#80
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Robot-location([o1]) \\ \hline
+				\{R([o1])\} \\ \hline
+				Move([o1],o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#81
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o24)\} \\ \hline
+				Move(o24,o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#82
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Move(o24,o3) \\ \hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#83
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{R(o3), RL(2), P(o3,2)\} \\ \hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#84
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				Serve(o3,2) \\ \hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#85
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+
+		\begin{tabular}[c]{@{}c@{}}
+			\setlength\tabcolsep{3pt}
+			\begin{tabular}{|c|}
+				\hline
+				\{S(o3), S(o25), S(o14), S(o32), S(o15)\} \\ \hline
+			\end{tabular}
+			\\
+			\\
+			Stack \#86
+			\\
+			\\
+			\\
+		\end{tabular}
+	
+
+		\end{multicols}
+	
