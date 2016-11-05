@@ -21,8 +21,10 @@ import java.util.Properties;
 import java.util.Set;
 
 public class Main implements HeuristicProvider, STRIPSLogger {
-    private Set<Predicate> initialState;
-    private Set<Predicate> goalState;
+    private static boolean BRUTEFORCE = false;
+    
+    private PredicateSet initialState;
+    private PredicateSet goalState;
     private Set<Operator> operators;
     private FileOutputStream output;
     
@@ -85,6 +87,20 @@ public class Main implements HeuristicProvider, STRIPSLogger {
             this.initialState.add(new Predicate("Steps", false, new String[]{"0"}, true));
         }
         
+        if (BRUTEFORCE) {
+            Param initialPosition = this.initialState.getPredicatesByName("Robot-location").iterator().next().getParams().get(0);
+            Param finalPosition = null;
+            
+            if (!this.goalState.getPredicatesByName("Robot-location").isEmpty()) {
+                finalPosition = this.goalState.getPredicatesByName("Robot-location").iterator().next().getParams().get(0);
+            }
+            
+            PredicateSet petitions = this.initialState.getPredicatesByName("Petition");
+            PredicateSet machines = this.initialState.getPredicatesByName("Machine");
+            System.out.println("Required steps: " + bruteforce(initialPosition, finalPosition, petitions, machines));
+            System.exit(0);
+        }
+        
         this.operators = new HashSet<>();
         
         // Make operator
@@ -126,7 +142,7 @@ public class Main implements HeuristicProvider, STRIPSLogger {
         solver.solve(this.operators, this.initialState, this.goalState, this, this);
     }
     
-    private Set<Predicate> readState(Properties input, String key) throws Exception {
+    private PredicateSet readState(Properties input, String key) throws Exception {
         if (!input.containsKey(key)) {
             throw new Exception("State \"" + key + "\" not found in the input file.");
         }
@@ -320,5 +336,49 @@ public class Main implements HeuristicProvider, STRIPSLogger {
         
         // TODO: do not show the output on the stdout
         //System.out.print(message);
+    }
+    
+    private int bruteforce(Param position, Param finalPosition, Set<Predicate> petitions, Set<Predicate> machines) {
+        if (petitions.isEmpty()) {
+            if (finalPosition == null) {
+                return 0;
+            }
+            
+            return MoveOperator.getManhattanDistance(position, finalPosition);
+        }
+        
+        int bestPetitionDistance = -1;
+        Iterator<Predicate> i = petitions.iterator();
+        
+        while (i.hasNext()) {
+            Predicate petition = i.next();
+            Param petitionPosition = petition.getParams().get(0);
+            String petitionCoffees = petition.getParams().get(1).getName();
+            int shortestDistance = -1;
+            Iterator<Predicate> j = machines.iterator();
+            
+            while (j.hasNext()) {
+                Predicate machine = j.next();
+                
+                if (machine.getParams().get(1).getName().equals(petitionCoffees)) {
+                    Param machinePosition = machine.getParams().get(0);
+                    int distance = MoveOperator.getManhattanDistance(position, machinePosition) + MoveOperator.getManhattanDistance(machinePosition, petitionPosition);
+                    
+                    if (shortestDistance == -1 || distance < shortestDistance) {
+                        shortestDistance = distance;
+                    }
+                }
+            }
+            
+            Set<Predicate> newPetitions = new HashSet<>(petitions);
+            newPetitions.remove(petition);
+            shortestDistance += bruteforce(petitionPosition, finalPosition, newPetitions, machines);
+            
+            if (bestPetitionDistance == -1 || shortestDistance < bestPetitionDistance) {
+                bestPetitionDistance = shortestDistance;
+            }
+        }
+        
+        return bestPetitionDistance;
     }
 }
