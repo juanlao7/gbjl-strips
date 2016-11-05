@@ -21,7 +21,7 @@ import java.util.Properties;
 import java.util.Set;
 
 public class Main implements HeuristicProvider, STRIPSLogger {
-    private static boolean BRUTEFORCE = false;
+    private static final boolean BRUTEFORCE = false;
     
     private PredicateSet initialState;
     private PredicateSet goalState;
