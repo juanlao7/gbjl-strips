@@ -1,3 +1,0 @@
-InitialState=Robot-location(o1);Petition(o1,1);
-
-GoalState=Robot-location(o1);Served(o1);
