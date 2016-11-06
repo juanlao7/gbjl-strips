@@ -1,0 +1,3 @@
+InitialState=Petition(o23,3);Petition(o25,3);Machine(o8,2);Machine(o34,3);Petition(o35,1);Petition(o21,2);Robot-location(o13);Petition(o26,1);Machine(o28,1);Petition(o31,1);Petition(o22,1);Petition(o6,2);Petition(o24,1);Petition(o11,2);Petition(o10,1);
+
+GoalState=Served(o11);Served(o22);Served(o23);Served(o24);Served(o10);Served(o31);Served(o26);Robot-location(o23);Served(o6);Served(o25);Served(o35);Served(o21);
