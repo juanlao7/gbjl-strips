@@ -1,0 +1,768 @@
+ \documentclass[12pt,a4paper,oneside]{article}
+\usepackage{amsfonts, amsmath, amssymb,latexsym,amsthm}
+\usepackage[english]{babel}
+\usepackage{epsfig}
+\usepackage{enumerate}
+\usepackage{graphicx} 
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{subfigure}
+%\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{cancel}
+\usepackage{feynmf}
+\usepackage{forest}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{epsfig}
+\usepackage{lscape}
+\usepackage{multicol}\usepackage{colortbl}
+
+\usepackage[left=1.7cm,top=2.7cm,right=1.7cm,bottom=2.7cm]{geometry}
+
+\usepackage{color}
+\definecolor{gray97}{gray}{.90}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+
+\usepackage{listings}
+\lstset{ frame=Ltb,
+framerule=0pt,
+aboveskip=0.5cm,
+framextopmargin=3pt,
+framexbottommargin=3pt,
+framexleftmargin=0cm,
+framesep=0pt,
+rulesep=.4pt,
+backgroundcolor=\color{gray45},
+rulesepcolor=\color{black},
+%
+stringstyle=\ttfamily,
+showstringspaces = false,
+basicstyle=l\ttfamily,
+commentstyle=\color{gray45},
+keywordstyle=\bfseries,
+%
+numbers=left,
+numbersep=15pt,
+numberstyle=\tiny,
+numberfirstline = false,
+breaklines=true,
+}
+
+% minimizar fragmentado de listados
+\lstnewenvironment{listing}[1][]
+{\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+
+\lstdefinestyle{consola}
+{basicstyle=\ttfamily,
+backgroundcolor=\color{gray97},
+}
+
+\numberwithin{equation}{section}
+
+\parskip=5pt
+\parindent=15pt
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{ dsfont }
+
+\setcounter{page}{1}
+
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposicio}{Proposici\'{o}}
+\newtheorem{corollari}{Corol$\cdot$lari}
+\newtheorem{lema}{Lema}
+
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+\newtheorem{exercici}{Exercise}
+\newtheorem{problema}{Problem}
+\newtheorem*{solucio}{Solution}
+\newtheorem{example}{Example}
+\newtheorem{examples}{Examples}
+\newtheorem{remarks}{Remarks}
+
+\newcommand{\Q}{\mathds{Q}}
+\newcommand{\A}{\alpha}
+\newcommand{\C}{\mathds{C}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\N}{\mathds{N}}
+\newcommand{\F}{\mathds{F}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Irr}{\mbox{Irr}}
+\newcommand{\gr}{\mbox{gr}}
+\newcommand{\Gal}{\mbox{Gal}}
+
+\def\qed{\hfill $\square$}
+
+\renewenvironment{abstract}
+ {\small
+  \begin{center}
+  \bfseries \abstractname\vspace{-.5em}\vspace{0pt}
+  \end{center}
+  \list{}{
+    \setlength{\leftmargin}{.5cm}%
+    \setlength{\rightmargin}{\leftmargin}%
+  }%
+  \item\relax}
+ {\endlist}
+
+\usepackage{fancyhdr}
+\usepackage{emptypage}
+
+%\pagestyle{fancy}
+
+\lhead{Guillermo Bernárdez and Juan Lao}
+\chead{PAR}
+\rhead{The Coffee Server}
+
+\cfoot{\thepage}
+
+\bibstyle{plain}
+\date{\today}
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+\usepackage{hyperref}
+
+\begin{document}
+
+\begin{center}
+	\textbf{ }\\[4cm]
+	
+	\Large Practical Exercise 1: Planner\\[0.5cm]
+	\textbf{{\Huge The Coffee Server}}\\[0.5cm]
+	\textbf{{\LARGE Planning and Approximate Reasoning}}\\[1.5cm]
+	
+	\begin{figure}[htb]
+		\begin{center}
+		\includegraphics[width=4cm]{urvlogo}
+		\end{center}
+	\end{figure} 
+	\vspace*{-0.5cm}
+	{\Large Universitat Rovira i Virgili}\\[1.5cm]
+	{\LARGE \textbf{Master in Artificial Inteligence}}\\[0.5cm]
+	{\LARGE $1^{st}$ Semester}\\[2.5cm]
+	
+	\begin{flushright}
+		\textbf{\large{Authors}}\\ \normalsize{Guillermo Bernárdez\\Juan Lao\\}
+	\end{flushright}
+	\today
+\end{center}
+\thispagestyle{empty} 
+%\maketitle
+\pagebreak
+
+\newpage
+
+\pagenumbering{roman} 
+
+\vspace*{1cm}
+\begin{abstract} The STRIPS algorithm, an automated planner developed by Richard Fikes and Nils Nilsson in 1971 at SRI International, can be applied to any state-based problem represented by a set of operators and predicates. In this paper we use STRIPS to solve a problem where a robot has to prepare and serve coffee to several offices in a building, designing specific heuristic functions for this domain.
+\end{abstract}
+\vspace*{\fill}
+
+
+\newpage
+
+
+\renewcommand*{\contentsname}{Index of contents}
+\tableofcontents
+
+\newpage
+
+\pagestyle{fancy}
+\pagenumbering{arabic} 
+\setcounter{page}{1}
+
+\section{Introduction} \label{Introduction}
+
+In this paper, we present a solution for the practical proposed exercise\cite{problemdefinition} in PAR course\cite{par}. In the following sections our team presents a definition of the problem and analyzes its characteristics, in order to formalize it as a set of operators and predicates to be able to solve it using the STRIPS algorithm\cite{strips}. Later our team proposes several heuristic methods to optimize the result of the solver for this specific problem and presents a solution implemented in Java\cite{java}. Finally, a table of results is presented and analyzed.
+
+
+Appendix A contains the system requirements and the necessary instructions to execute the proposed solution.
+
+%----------------------------------------------------------------------------------------------------
+
+\section{Definition of the Problem} \label{Definition of the Problem}
+
+The problem, called The Coffee Server\cite{problemdefinition}, considers the following scenario:
+
+
+“There is a squared building composed by 36 offices, which are located in a matrix of 6 rows and 6 columns. From each office it is possible to move (horizontally or vertically) to the adjacent offices. The building has some coffee machines in some offices that can make 1, 2 or 3 cups of coffee at one time.
+
+
+The people working at the offices may ask for coffee and a robot called “Clooney” is in charge of serving the coffees required. Each office may ask for 1, 2 or 3 coffees but not more. The petitions of coffee are done all at early morning (just when work starts) so that the robot can plan the service procedure. Each petition has to be served in a single service.
+
+
+The goal is to serve all the drinks to all the offices in an efficient way (minimizing the travel inside the building, in order to not disturb the people working).
+
+
+The robot will start with a given initial configuration (different for each test), with some petitions of coffee on a subset of the offices in the building. The initial configuration also establishes the positions of the coffee machines and the initial position of the robot. In the goal state no more petitions are pending to be served.”
+
+
+In this practical exercise our team have to design and implement (in Java) a linear planner with a stack of goals (STRIPS) that can discover how to go efficiently from an initial state of the world to the goal state explained before.
+
+
+\newpage
+%----------------------------------------------------------------------------------------------------
+
+\section{Analysis of the Problem} \label{Analysis of the Problem}
+
+This section formalizes the problem as a set of predicates, parameters, operators and constraints, as it is defined in the problem definition\cite{problemdefinition}.
+
+
+The predicates to be considered are the following:
+\begin{itemize}
+	\item Robot-location(o): the robot is in office o.
+	\item Robot-free: the robot has no cup of coffee
+	\item Robot-loaded(n): the robot has n cups of coffee
+	\item Petition(o,n): office o wants n cups of coffee
+	\item Served(o): office o has been served, no more coffee is needed in this office
+	\item Machine(o,n): there is a coffee machine in office o that produces n cups of coffee each time (with n equal to 1, 2 or 3)
+	\item Steps(x): the total distance travelled by the robot (calculated with Manhattan distance)
+\end{itemize}
+
+The operators to be considered are the following:
+%where their precondition and postcondition lists are shown in Table \ref{operatorstable}:
+\begin{itemize}
+	\item Make(o,n): the robot makes n cups of coffee in the machine located at office o
+	\begin{itemize}
+		\item Preconditions: Robot-location(o), Robot-free, Machine(o,n)
+		\item Postconditions: Robot-loaded(n), $\neg$Robot-free
+	\end{itemize}
+	\item Move(o1,o2): the robot moves from o1 to o2
+	\begin{itemize}
+		\item Preconditions: Robot-location(o1), Steps(x) \footnote{As we will see in section \ref{Implementation Design}, the Steps(x) precondition has been removed from the final implementation, since it always exists in the current state.}.
+		\item Postconditions: Robot-location(o2), Steps(x+distance(o1,o2)), $\neg$Robot-location(o1), $\neg$Steps(x)
+	\end{itemize}
+	\item Serve(o,n): the robot delivers n cups of coffee to office o
+	\begin{itemize}
+		\item Preconditions: Robot-location(o), Robot-loaded(n), Petition(o,n)
+		\item Postconditions: Served(o), Robot-free, $\neg$Petition(o,n), $\neg$Robot-loaded(n)
+	\end{itemize}
+\end{itemize}
+
+There are three types of parameters to be considered:
+\begin{itemize}
+	\item o: this parameter represents a location in the grid in terms of the number of the office. Since we have a finite $6 \times 6$ grid, the allowed value for this parameter is oi, where i is a natural number between 1 and 36 (inclusive).
+	\item n: represents the number of coffees. We only consider petitions and machines up to 3 coffees, so it can only take the values 1, 2 and 3.
+	\item x: this parameter represents a certain number of steps (i.e. a single or accumulated Manhattan distance), and its value can take any natural number (including 0). 
+\end{itemize}
+
+
+Constraints that simplify the problem, as stated in \cite{problemdefinition}:
+\begin{enumerate}
+	\item The robot only makes coffee for a single petition each time. That is, the robot cannot make 3 cups of coffee to serve two different offices. First, will make coffee of one office and serve it, and after will go to the same or another coffee machine to serve the second office.
+	\item If a petition is of n cups, the robot will make coffee only with a unique machine of capacity n. That is, the robot cannot make coffee with 2 or more machines and accumulate the cups to serve a unique petition.
+\end{enumerate}
+
+
+Without taking into account the Steps(x) predicate, the search space of this problem is gigantic: Robot-location has 36 possible parameters, the robot has 4 possible states (free or loaded with 1, 2 or 3 coffees) and each petition can be served or still pending. Taking into account the Steps(x) predicate, the search space of this problem becomes infinite, since $x$ can take any value in $\mathbb{N}$.
+
+
+“STRIPS uses a GPS-like means-end analysis strategy\cite{gps}. This combination of means-ends analysis and formal theorem-proving methods allows objects (world models) much more complex and general than any of those used in GPS and provides more powerful search heuristics than those found in theorem-proving programs”\cite{strips}. Thanks to this property, we can solve our problem although the search space is infinite.
+
+
+%----------------------------------------------------------------------------------------------------
+
+\section{Planning Algorithm} \label{Planning Algorithm}
+
+This section presents and analyzes the different heuristics proposed for the solution of the problem, explaining the domain knowledge behind them. We recall from the notes of the course\cite{notes} that the STRIPS algorithm has three potential situations in which a problem-dependent strategy may be deployed in order to improve the performance of the planner (or even to make it work correctly):
+\begin{enumerate}
+	\item When choosing an operator to achieve a certain predicate.
+	\item When sorting a set of predicates to add them to the stack.
+	\item When instantiating a parameter of a partially instantiated predicate.
+\end{enumerate}
+We study each case separately.
+
+\subsection{Choosing an operator} \label{Choosing an Operator}
+
+When the top element of the stack is a predicate that is not contained in the current state, the STRIPS algorithm looks for an operator that adds this predicate to the current state. In a general example, it could be the case that there were several operators that had that predicate in their postcondition list, some of them perhaps representing a better choice than others. In that case, after studying the specific problem, we may be able to design an intelligent strategy to choose the most appropriate operator. 
+
+
+In the Coffee Server problem, however, each predicate satisfies that only appears in the postcondition list of one of the operators, so we don’t have to deal with this problem.
+
+\subsection{Sorting a Set of Predicates} \label{Sorting a Set of Predicates}
+
+In general, given a set of predicates, the order in which we add its predicates to the stack can become crucial in order to make the planner more efficient, or even to avoid loops. When dealing with a specific problem, a previous analysis of it might suggest us some strategies about how to sort the predicates appropriately.
+
+
+In the Coffee Server problem we distinguish two kinds of set of predicates depending on the sorting process: firstly, the one associated with the goal state, which is the only that can contain Served(o) predicates; and secondly, the sets of predicates related to the precondition lists of the three operators. We detail the domain-knowledge applied to each of them separately, 
+
+\subsubsection{Sorting the Goal State}
+
+A reasonable goal state consists in a set of one or more Served(o) predicates plus an optional single Robot-location(o) to state the final office position of the robot. A goal state can potentially contain other predicates, but they are not relevant for this heuristic.
+
+
+First of all, it is straightforward to see that all Served(o) predicates should be placed in the stack on top of the Robot-location(o). Then, a more complex strategy is required to sort the different Served(o) predicates. We point out that the order of these predicates may highly determine the number of steps of the itinerary followed by the robot, which is just the quantity that we would like to minimize. 
+
+
+We propose an heuristic function based on sorting the Served(o) predicates by looking for sequences of nearby ones (considering the Manhattan distance) starting from the initial and, it it is stated in the goal state, from the final position as well. More specifically:
+\begin{enumerate}
+	\item We start looking for the Served(o) predicate whose position parameter is the closest to the initial position of the robot; it will be the first element taken into account by the planning process. This step defines the top part of the stack.
+	\item In the next step, if the goal state defines a final position for the robot and there are still unordered Served(o) predicates, we look for the Served(o) predicate whose position parameter is the closest to the final position of the robot; it will become the last Served(o) element taken into account by the planner. This step defines the bottom part of the stack
+	\item Until all Served(o) predicates are ordered, we repeat:
+	\begin{enumerate}
+		\item We consider the last Served(o) predicate added to the top part of the stack, and look for its closest Served(o9 predicate among the remaining ones; it will be the following Served(o) predicate in that top part of the stack.
+		\item If there are still unordered Served(o) predicates and the goal state defines a final position, we consider now the last Served(o) predicate added to the bottom part of the stack, and again look for its closest Served(o) predicate among the remaining ones; it will become the top Served(o) predicate in that bottom part of the stack.
+	\end{enumerate}
+\end{enumerate}
+This is a fairly simple process that allows us to obtain a reasonable order of serving the commands, avoiding considering two consecutive far petitions while there are closer ones, as well as taking into account the final state (provided it is stated in the goal state) besides the initial one so that, if possible, the robot does not serve the last coffee request far from its final position. 
+
+
+Note that our heuristic does not guarantee an optimal organization at all; it does not even take into account the locations of the coffee machines when sorting the Served(o) predicates. A more sophisticated heuristic may lead to solutions closer (or equal) to the optimal one, but in that case it is actually resolving the entire planning problem beforehand.
+
+
+\subsubsection{Sorting the precondition list of an operator}
+
+When adding the predicates of a precondition list, we realize that:
+\begin{itemize}
+	\item If the precondition list corresponds to the Move(o1,o2) operator, it doesn’t matter the order in which its predicates are added to the stack. 
+	\item If the precondition list corresponds to the Make([o],n) operator, it is desirable to add its predicates in the following order
+	\begin{itemize}
+		\item Firstly, Robot-location([o]);
+		\item Then Machine([o], n);
+		\item Lastly, Robot-free.
+	\end{itemize}
+	In that way, the top element of the stack is Robot-free (to ensure that the robot is not holding coffees already), the second one Machine([o], n) (to look for the location of a Machine that can make a given number of coffees), and finally we validate Robot-location([o]) (to make the robot be at the location of the selected machine). 
+	\item If the precondition list corresponds to the Serve(o,[n]) operator, there is also a preferred order when adding its predicates to the stack:
+	\begin{itemize}
+		\item Firstly, Robot-location(o);
+		\item Then Robot-loaded([n]);
+		\item Lastly, Petition(o,[n]).
+	\end{itemize}
+	Thus, the first predicate to be evaluated is Petition(o,[n]) (to look for the number of coffees requested at that office), the next one is Robot-loaded([n]) (to make sure that it holds the requested number of coffees), and Robot-location(o) afterwards (to make the robot be at the office where it must serve those coffees). 
+	\item We point out that, when sorting the precondition list of a Make(o,n) or Serve(o,n) operator, different orders than the ones shown above may lead to fool behaviours of the robot, or even to stop the planner without finding a solution; these effects are consequences of illogical or nonexisting matches for the required instantiations. 
+\end{itemize}
+
+
+We also note that the all orders stated above are compatible with a general order provided that it respects the priorities shown in Table \ref{orderpriority}, where it doesn’t matter the relative order between predicates that share the same priority. 
+
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{On top of the stack} & \textbf{On the middle} & \textbf{At the bottom} & \textbf{No matters} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Petition\\ Robot-free\end{tabular} & \begin{tabular}[c]{@{}l@{}}Robot-loaded\\ Machine\end{tabular} & Robot-location & Steps \\ \hline
+\end{tabular}%
+}
+\caption{Preferences that must satisfy a general order.}
+\label{orderpriority}
+\end{table}
+
+For instance, given a set of predicates that comes from a precondition list, one valid order for looking for the predicates (and add them to the stack if found) is the following:
+
+Steps(x), Robot-location(o), Machine(o,n), Robot-loaded(n), Robot-free, Petition(o,n)
+
+
+\subsection{Instantiating a Parameter} \label{Instantiating a Parameter}
+
+When considering predicates that are partially instantiated, the STRIPS algorithm searches for possible values of the non-instantiated parameters taking into account the current state at that moment. In a specific problem, when different candidates for a given instantiation are found, the domain-knowledge of that problem can help to define an heuristic function in order to find the most appropriate value among the candidates.
+
+
+In the Coffee Server problem, if the sorting of the sets of predicates is made as we have explained in the previous subsection, the STRIPS algorithm can only find the following partially instantiated predicates\footnote{one may note that steps([x]) is not in the list. This is due to the fact that, in our implementation, the predicate Steps(x) is not contained in the precondition list of the Move(o1,o2) operator, as it is explained in Section \ref{Implementation Design}}:
+Machine([o],n) (coming from the precondition list of the Make([o],n) operator);
+Petition(o,[n])(from Serve(o,[n]) operator);
+Robot-location([o1]) (from Move([o1],o2) operator);
+Note that the parameters between brackets are the uninstantiated ones.
+
+
+For each of these predicates, the STRIPS algorithm tries to obtain a valid value for its parameter by matching the corresponding predicate with predicates in the current state that have the same name and, if the predicate we want to instantiate has already an instantiated parameter, share the same value of this parameter as well. In our case, whereas the algorithm only returns a single match for  Petition(o,[n]) and Robot-location([o1]), it can actually return a set of several valid matches for Machine([o],n). 
+
+
+When we have different candidates for the position of the Machine predicate, as we are interested in minimizing the number of steps, our strategy is to choose the position $o’$ among them that minimizes
+$$d_{Manhattan} (o_0, o’) + d_{Manhattan}(o’, o_f)$$,
+Where $o_0$ is the current location of the robot and $o_f$ the location of the petition that is being considered at that specific moment \footnote{$o_f$ can be found by looking for the position parameter of the unique Serve operator that is present in the stack at that instant.}. 
+
+
+With this heuristic function we guarantee that the robot always goes to the coffee machine that, given the current location, implies the lower number of steps required to go to make the coffees and then go to serve them.
+
+%----------------------------------------------------------------------------------------------------
+
+\section{Implementation Design} \label{Implementation Design}
+The implementation of the solution for this problem is divided into two parts:
+\begin{enumerate}
+	\item The general STRIPS algorithm.
+	\item The particular case of the coffee server, as an extension of part 1.
+\end{enumerate}
+Figure \ref{simplediagram} is a simplification of the system class diagram, where classes are grouped by the package in which they are included. A more complete class diagram of the system can be found in Appendix B.
+
+\begin{figure}[h!]
+	\begin{center}
+	\includegraphics[scale=0.22]{simple}
+	\end{center}
+	\caption{Simple class diagram}
+	\label{simplediagram}
+\end{figure}
+
+Package \texttt{com.gbjl.strips} contains the general STRIPS algorithm that, in summary, consists on these classes:
+\begin{itemize}
+	\item \texttt{Solver}: this class implements the STRIPS algorithm and it is executed when the method \texttt{solve(...)} is called with a given set of operators, an initial state, a goal state, a heuristic provider and a logger.
+	\item \texttt{HeuristicProvider}: this interface provides the three heuristic functions that the solver uses, as explained in Section \ref{Planning Algorithm}. Class \texttt{Solver} calls those functions when needed.
+	\item \texttt{STRIPSLogger}: this interface provides a function for logging messages. Class \texttt{Solver} calls this function several times to give information about what it is doing, as well as changes in the current state or the current stack.
+	\item \texttt{Element}: this interface represents an element of the stack. In this simplification it has no methods, but internally it provides a function for the instantiation of parameters.
+	\item \texttt{Param}: this class represents a parameter of a predicate or operator. It has a name and it can be instantiated (or not).
+	\item \texttt{Predicate}: this class represents a predicate. It has a name, it can be negated (or not) and it contains a list of parameters.
+	\item \texttt{Operator}: this class represents an operator. It has a name, a list of parameters, a list of preconditions and a list of postconditions. It can be extended with a subclass in order to implement advanced features, such as the \texttt{Move} operator of our coffee server problem, which requires a special case for managing the postcondition of \texttt{Steps(x+d)}.
+	\item \texttt{PredicateSet}: this class represents a set of predicates.
+\end{itemize}
+
+
+Package \texttt{com.gbjl.strips.examples.thecoffeeserver} contains the particular case of the coffee server that consists on these classes:
+\begin{itemize}
+	\item \texttt{Main}: this class is the start point of the problem. It defines all the required operators (with its parameters, preconditions and postconditions), reads the initial and goal states from a given file and executes the STRIPS algorithm using \texttt{com.gbjs.strips.Solve}. It also provides the required heuristic functions and the logger function, that stores the algorithm log in a given file.
+	\item \texttt{MoveOperator}: this class extends from \texttt{Operator}. It adds the required parameters, preconditions and postconditions to itself and overrides the \texttt{getPostconditions(...)} method, to be able to return the predicate \texttt{Steps(x+d)} based on the current state \texttt{Steps(x)} predicate. In order to simplify the problem, predicate \texttt{Steps(x)} has not been included in the list of preconditions of this operator, since it always exists in the current state.
+\end{itemize}
+
+
+%----------------------------------------------------------------------------------------------------
+
+\section{Results} \label{Results}
+
+In this section we present and compare the results of several testing cases solved by our system:
+\begin{itemize}
+	\item Case 1: the example proposed in the problem definition. It consists on 5 petitions and 5 machines, and the proposal solves it with 25 steps.
+	\item Case 2: a random example. It consists on 10 petitions and 10 machines.
+	\item Case 3: another random example, but without a Robot-location(o) predicate in the goal state. It consists on 5 petitions and 5 machines.
+	\item Case 4: a difficult case for our heuristic functions, that solve the problem in a very inefficient way. This is an example of a worst-case scenario for our solution: all petitions are distributed on two ends of the grid, and satisfy that all their suitable machines are located in their opposite end. We expect the robot to be constantly crossing without optimizing the travels at all.
+	\item Case 5: an impossible case, where there is a petition of 1 coffees but no machines. It is expected that the program throws an error.
+	\item Case 6: a random case with a lot of petitions (11) but few machines (3).
+\end{itemize}
+We point out that the exact input for each of these cases can be fount in Appendix C.
+
+Table \ref{results} shows the performance of our algorithm measured in the number of steps the robot must do in order to achieve the goal state. This number is compared with the optimal solution, found using an algorithm not presented in this paper. Appendix C contains a detailed representation of the state and stack evolution of each execution of these tests.
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Case} & \textbf{\begin{tabular}[c]{@{}c@{}}1 cup\\ petition\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}2 cup\\ petition\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}3 cup\\ petition\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}1 cup\\ machines\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}2 cup\\ machines\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}3 cup\\ machines\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Final\\ steps\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Optimal\\ solution\end{tabular}} \\ \hline
+1             & 3                                                                 & 1                                                                 & 1                                                                 & 2                                                                 & 2                                                                 & 1                                                                 & \cellcolor[HTML]{9AFF99}{\color[HTML]{333333} 25}              & 25                                                                  \\ \hline
+2             & 6                                                                 & 2                                                                 & 2                                                                 & 2                                                                 & 2                                                                 & 6                                                                 & \cellcolor[HTML]{FFFC9E}56                                     & 52                                                                  \\ \hline
+3             & 2                                                                 & 2                                                                 & 1                                                                 & 1                                                                 & 1                                                                 & 3                                                                 & \cellcolor[HTML]{FFFC9E}43                                     & 39                                                                  \\ \hline
+4             & 1                                                                 & 1                                                                 & 1                                                                 & 1                                                                 & 1                                                                 & 1                                                                 & \cellcolor[HTML]{FFCCC9}42                                     & 26                                                                  \\ \hline
+5             & 1                                                                 & 0                                                                 & 0                                                                 & 0                                                                 & 0                                                                 & 0                                                                 & N/A                                                            & N/A                                                                 \\ \hline
+6             & 6                                                                 & 3                                                                 & 2                                                                 & 1                                                                 & 1                                                                 & 1                                                                 & \cellcolor[HTML]{FFFC9E}69                                     & 61                                                                  \\ \hline
+\end{tabular}
+\caption{Results of the different cases}
+\label{results}
+\end{table}
+
+\newcommand{\plottwodee}[1]{
+	\begin{tikzpicture}
+		\begin{axis}[
+				xlabel={#1},
+				ylabel=Steps,
+			]
+			\addplot[
+				scatter,
+				only marks,
+			]
+			table[
+				x=#1,
+				y=Steps,
+				col sep=comma,
+			]{results.csv};
+		\end{axis}		
+	\end{tikzpicture}
+}
+
+In case 5, the program throws the following message:
+Error. Predicate "Machine([o],1)" cannot be instantiated in the state "Petition(o1,1);Steps(0);Robot-free;Robot-location(o1);".
+
+In case 4, as we expected, we obtain the worst result by far. The robot, as we can see with much more detail in Appendix C, Case 4, instead of taking advantage of the crossings from one end to the other to serve the petitions of both sides at the same time, does respect the sequence of nearest petitions that the heuristic provides it and, consequently, delivers the petitions with a larger number of steps than required.
+
+
+As the table shows, our solution is near the optimal solution for the major part of cases, but it is very inefficient for specific cases where the heuristic function do not sort the Served(o) predicates in a good way, since it does not take in account the position of the machines. However, this table is short and does not represents correctly the performance of our solution.
+
+
+In order to have a better idea of the performance of the algorithm, we also created 300 random cases, where each case has a random number of machines between 1 and 36 and a random number of petitions between 1 and 36. All cases can be solved, since there exists a machine that makes N coffees for each petition of N coffees.
+
+Figures \ref{fig:2d-petitions}, \ref{fig:2d-petitions} and CHART3 represent the relation between the number of petitions, the number of machines and the number of steps required to solve the problem.
+
+In \ref{fig:2d-petitions} we can see how the number of petitions is directly correlated with the number of needed steps. Due to the low number of offices in the building, it is hard to determine the kind of correlation between both variables. However, from our point of view, it looks like an exponential function.
+	
+\begin{figure}[h!]
+	\centering
+	\plottwodee{Petitions}
+	\caption{Relation between petitions and steps}
+	\label{fig:2d-petitions}
+\end{figure}
+
+In \ref{fig:2d-petitions} we can see how the number of machines define a top limit to the number of needed steps. This limit is an inverse correlation between the two variables. Under this limit, the number of steps required to solve the problem does not follow any special distribution.
+
+\begin{figure}[h!]
+	\centering
+	\plottwodee{Machines}
+	\caption{Relation between machines and steps}
+	\label{fig:2d-petitions}
+\end{figure}
+
+\newcommand{\plotthreedee}[2]{
+	\begin{axis}[
+		scale=0.75,
+		view={#2}{#1},
+		xlabel=Petitions,
+		ylabel=Machines,
+		zlabel=Steps,
+	]
+	\addplot3[
+		scatter,
+		only marks,
+	]
+	table[
+		x=Petitions,
+		y=Machines,
+		z=Steps,
+		col sep=comma,
+	]{results.csv};
+	\end{axis}
+}
+
+%	\begin{figure}
+%		\centering
+%		\begin{subfigure}
+%			\begin{tikzpicture}
+%				\plotthreedee{20}{70}
+%			\end{tikzpicture}
+%		\end{subfigure}
+%		\begin{subfigure}
+%			\begin{tikzpicture}
+%				\plotthreedee{45}{20}
+%			\end{tikzpicture}
+%		\end{subfigure}
+%		\caption{Relation between petitions, machines and steps}
+%		\label{fig:3d-a}
+%	\end{figure}
+
+
+%----------------------------------------------------------------------------------------------------
+
+\section{Conclusions and Future Work} \label{Conclusions}
+
+In sections \ref{Definition of the Problem} and \ref{Analysis of the Problem}, our team presented a definition of the problem and analyzed its characteristics, in order to formalize it as a set of operators and predicates to be able to solve it using the STRIPS algorithm.
+
+
+Later, in section \ref{Planning Algorithm}, our team proposed several heuristic functions to optimize the result of the solver for this specific problem.
+
+
+In section \ref{Implementation Design},  we presented a solution implemented in Java and we explained the details of the object oriented architecture.
+
+Finally, a table of results was presented and analyzed, and we concluded that our solution is near to the optimal one, but in some cases can be very inefficient.
+
+
+In general, due to the nature of the STRIPS algorithm, this program does not find the optimal plan for serving coffee with the minimum number of robot steps. Nevertheless, it can be close to it in many situations thanks to the proposed heuristic functions. Optimal solutions for this problem may be found using, for example, a non-linear planning algorithm with regression, but this subject is out of the scope of this paper.
+
+
+
+%--------------------------------------------------------------------------------------------------
+\newpage
+
+%\thispagestyle{plain}
+\addcontentsline{toc}{section}{References}\sectionmark{References}
+\begin{thebibliography}{25}
+
+\bibitem{problemdefinition} Problem definition, \url{https://moodle.urv.cat/moodle/pluginfile.php/2303642/mod_resource/content/4/PlannerExercise16-17.pdf}
+
+\bibitem{par} PAR course \url{https://moodle.urv.cat/docnet/guia_docent/index.php?centre=17&ensenyament=1768&assignatura=17685204&font=12&any_academic=2016_17&modalitat=p}
+
+\bibitem{strips} STRIPS paper \url{http://ai.stanford.edu/~nilsson/OnlinePubs-Nils/PublishedPapers/strips.pdf}
+
+\bibitem{java} JAVA
+
+\bibitem{gps} Ernst, G. and .~4ewell, A. GPS: A Case Study in Generality and Problem Solving. ACM
+Monograph Series. Academic Press, New York, New York, 1969
+
+\bibitem{notes} Notes of the PAR course
+
+
+
+\end{thebibliography}
+
+
+%--------------------------------------------------------------------------------------------------
+\newpage
+
+\section*{Appendix A: Instructions to Execute the Program} \label{Instructions to Execute the Program}
+
+\addcontentsline{toc}{section}{Appendix A: Instructions to Execute the Program}\sectionmark{Appendix A: Instructions to Execute the Program}
+
+\subsection*{System requirements}
+\begin{itemize}
+	\item Microsoft Windows Vista or higher. (older versions are not supported by Microsoft\footnote{\url{https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet}} at the date of the publication of this paper).
+	\item Java JDK 1.8\footnote{\url{http://www.oracle.com/technetwork/es/java/javase/downloads/index.html}}
+\end{itemize}
+
+\subsection*{Step 1: build}
+In the command line console, go to the project directory and execute the following command:
+
+\begin{listing}[style=consola, numbers=none]
+build-thecoffeeserver.bat
+\end{listing}
+
+\subsection*{Step 2: run}
+Now, to run the program, execute the following command:
+
+\begin{listing}[style=consola, numbers=none]
+java -jar out/thecoffeeserver.jar <input file> <output file>
+\end{listing}
+where:
+\begin{itemize}
+	\item \texttt{<input file>} is a file containing the initial and goal states, with the format stated in the problem definition.
+	\item \texttt{<output file>} is the file where the program will store a detailed log of the solving process, including the plan (as a list of operators) to achieve the goal state from the initial state.
+\end{itemize}
+
+To run the input proposed in the problem definition, execute the following command:
+
+\begin{listing}[style=consola, numbers=none]
+java -jar out/thecoffeeserver.jar docs/thecoffeeserver/case1.txt out/output.txt
+\end{listing}
+
+The output of the program will be stored in out/output.txt.
+
+
+
+%--------------------------------------------------------------------------------------------------
+\newpage
+
+
+\section*{Appendix B: Complete Class Diagram} \label{Complete Class Diagram}
+
+\addcontentsline{toc}{section}{Appendix B: Complete Class Diagram}\sectionmark{Appendix B: Complete Class Diagram}
+
+This is a complete class diagram of the system. Note that relation multiplicities have been omitted.
+
+\begin{figure}[h!]
+	\begin{center}
+	\includegraphics[scale=0.16]{gbjl-stripshor}
+	\end{center}
+	\caption{Complete class diagram}
+\end{figure}
+
+%--------------------------------------------------------------------------------------------------
+\newpage
+
+\section*{Appendix C: Test Results} \label{Test Results}
+
+\addcontentsline{toc}{section}{Appendix C: Test Results}\sectionmark{Appendix C: Test Results}
+
+This appendix contains a detailed representation of the state and stack evolution of each test execution proposed in section REFERENCIASECCIONTESTS.
+
+
+For reasons of space, we abbreviated some predicates with the following dictionary:
+\begin{itemize}
+	\item Robot-loaded $\rightarrow$ RL
+	\item Robot-free $\rightarrow$ RF
+	\item Robot-location $\rightarrow$ R
+	\item Steps $\rightarrow$ ST
+	\item Machine $\rightarrow$ M
+	\item Petition $\rightarrow$ P
+	\item Served $\rightarrow$ S
+\end{itemize}
+
+For the same reason, when we represent a state using a 6x6 board with predicates in the corresponding cells, we omitted those parameters that reference office locations, since they are implicitly represented. For example, if \texttt{M(2)} is written in the cell (2,3) of a board, it means \texttt{Machine(o14,2)}.
+
+
+\subsection*{Case 1}
+
+\subsubsection*{Input File}
+
+\begin{listing}[style=consola, numbers=none]
+InitialState=Robot-location(o1);Machine(o4,3);Machine(o8,1);Machine(o21,2);Machine(o23,1);Machine(o31,2);Petition(o3,1); Petition(o11,3);Petition(o12,1);Petition(o13,2);Petition(o25,1);
+
+GoalState=Robot-location(o7);Served(o3);Served(o11);Served(o12);Served(o13);Served(o25);
+\end{listing}
+
+\input{case1} 
+
+
+\subsection*{Case 2}
+
+\subsubsection*{Input File}
+
+\begin{listing}[style=consola, numbers=none]
+InitialState=Petition(o33,2);Robot-location(o16);Machine(o25,3);Machine(o24,3);Machine(o29,3);Machine(o28,3);Machine(o7,2);Petition(o6,2);Machine(o11,1);Petition(o17,1);Petition(o19,3);Petition(o13,3);Machine(o3,3);Petition(o18,1);Petition(o31,1);Petition(o1,1);Machine(o16,1);Petition(o27,1);Machine(o5,2);Machine(o8,3);Petition(o26,1);
+
+GoalState=Served(o6);Served(o13);Robot-location(o7);Served(o1);Served(o33);Served(o19);Served(o18);Served(o31);Served(o27);Served(o17);Served(o26);
+\end{listing}
+
+\input{case2} 
+
+
+\subsection*{Case 3}
+
+\subsubsection*{Input File}
+
+\begin{listing}[style=consola, numbers=none]
+InitialState=Machine(o31,3);Petition(o15,1);Robot-location(o35);Machine(o12,1);Petition(o3,2);Petition(o25,3);Machine(o24,2);Petition(o14,1);Petition(o32,2);Machine(o16,3);Machine(o28,3);
+
+GoalState=Served(o3);Served(o15);Served(o14);Served(o25);Served(o32);
+\end{listing}
+
+\input{case3} 
+
+
+\subsection*{Case 4}
+
+\subsubsection*{Input File}
+
+\begin{listing}[style=consola, numbers=none]
+InitialState=Robot-location(o1);Machine(o1,1);Petition(o36,1);Machine(o30,2);Petition(o7,2);Machine(o13,3);Petition(o24,3);
+
+GoalState=Served(o36);Served(o7);Served(o24);Robot-location(o24);
+\end{listing}
+
+\input{case4} 
+
+
+\subsection*{Case 5}
+
+\subsubsection*{Input File}
+
+\begin{listing}[style=consola, numbers=none]
+InitialState=Robot-location(o1);Petition(o1,1);
+
+
+GoalState=Robot-location(o1);Served(o1);
+\end{listing}
+
+\subsubsection*{Result}
+
+\begin{listing}[style=consola, numbers=none]
+Error. Predicate "Machine([o],1)" cannot be instantiated in the state "Petition(o1,1);Steps(0);Robot-free;Robot-location(o1);"
+\end{listing}
+
+
+\subsection*{Case 6}
+
+\subsubsection*{Input File}
+
+\begin{listing}[style=consola, numbers=none]
+InitialState=Petition(o23,3);Petition(o25,3);Machine(o8,2);Machine(o34,3);Petition(o35,1);Petition(o21,2);Robot-location(o13);Petition(o26,1);Machine(o28,1);Petition(o31,1);Petition(o22,1);Petition(o6,2);Petition(o24,1);Petition(o11,2);Petition(o10,1);
+
+GoalState=Served(o11);Served(o22);Served(o23);Served(o24);Served(o10);Served(o31);Served(o26);Robot-location(o23);Served(o6);Served(o25);Served(o35);Served(o21);
+\end{listing}
+
+\input{case6} 
+
+
+
+%--------------------------------------------------------------------------------------------------
+
+\end{document}
+
