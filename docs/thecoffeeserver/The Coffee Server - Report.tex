@@ -507,7 +507,7 @@ As the table shows, our solution is near the optimal solution for the major part
 
 In order to have a better idea of the performance of the algorithm, we also created 300 random cases, where each case has a random number of machines between 1 and 36 and a random number of petitions between 1 and 36. All cases can be solved, since there exists a machine that makes N coffees for each petition of $N$ coffees.
 
-Figures \ref{fig:2d-petitions}, \ref{fig:2d-petitions} and \ref{fig:3d-a} represent the relation between the number of petitions, the number of machines and the number of steps required to solve the problem.
+Figures \ref{fig:2d-petitions}, \ref{fig:2d-machines}, \ref{fig:3d-a} and \ref{fig:3d-b} represent the relation between the number of petitions, the number of machines and the number of steps required to solve the problem.
 
 In figure \ref{fig:2d-petitions} we can see how the number of petitions is directly correlated with the number of needed steps. Due to the low number of offices in the building, it is hard to determine the kind of correlation between both variables. However, from our point of view, it looks like an exponential function.
 	
@@ -518,7 +518,7 @@ In figure \ref{fig:2d-petitions} we can see how the number of petitions is direc
 	\label{fig:2d-petitions}
 \end{figure}
 
-In \ref{fig:2d-petitions} we can see how the number of machines define a top limit to the number of needed steps. This limit is an inverse correlation between the two variables. Under this limit, the number of steps required to solve the problem does not follow any special distribution.
+In figure \ref{fig:2d-machines} we can see how the number of machines define a top limit to the number of needed steps. This limit is an inverse correlation between the two variables. Under this limit, the number of steps required to solve the problem does not follow any special distribution.
 
 \begin{figure}[h!]
 	\centering
@@ -555,7 +555,7 @@ In \ref{fig:2d-petitions} we can see how the number of machines define a top lim
 		\plotthreedee{20}{70}
 	\end{tikzpicture}
 	\caption{Relation between petitions, machines and steps (view A)}
-\label{fig:3d-a}
+	\label{fig:3d-a}
 \end{figure}
 
 \begin{figure}
@@ -564,7 +564,7 @@ In \ref{fig:2d-petitions} we can see how the number of machines define a top lim
 		\plotthreedee{45}{20}
 	\end{tikzpicture}
 	\caption{Relation between petitions, machines and steps (view B)}
-	\label{fig:3d-a}
+	\label{fig:3d-b}
 \end{figure}
 
 \clearpage
