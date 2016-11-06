@@ -5,3 +5,8 @@
 docs/thecoffeeserver/plot.log
 docs/thecoffeeserver/plot.pdf
 docs/thecoffeeserver/plot.synctex.gz
+*.log
+docs/thecoffeeserver/Report PAR/The Coffee Server - Report.out
+*.out
+*.toc
+docs/thecoffeeserver/The Coffee Server - Report.synctex.gz
