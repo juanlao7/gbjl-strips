@@ -8,8 +8,8 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{subfigure}
-%\usepackage{caption}
-%\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{cancel}
 \usepackage{feynmf}
 \usepackage{forest}
@@ -513,12 +513,11 @@ In \ref{fig:2d-petitions} we can see how the number of machines define a top lim
 	\centering
 	\plottwodee{Machines}
 	\caption{Relation between machines and steps}
-	\label{fig:2d-petitions}
+	\label{fig:2d-machines}
 \end{figure}
 
 \newcommand{\plotthreedee}[2]{
 	\begin{axis}[
-		scale=0.75,
 		view={#2}{#1},
 		xlabel=Petitions,
 		ylabel=Machines,
@@ -537,21 +536,23 @@ In \ref{fig:2d-petitions} we can see how the number of machines define a top lim
 	\end{axis}
 }
 
-%	\begin{figure}
-%		\centering
-%		\begin{subfigure}
-%			\begin{tikzpicture}
-%				\plotthreedee{20}{70}
-%			\end{tikzpicture}
-%		\end{subfigure}
-%		\begin{subfigure}
-%			\begin{tikzpicture}
-%				\plotthreedee{45}{20}
-%			\end{tikzpicture}
-%		\end{subfigure}
-%		\caption{Relation between petitions, machines and steps}
-%		\label{fig:3d-a}
-%	\end{figure}
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\plotthreedee{20}{70}
+	\end{tikzpicture}
+	\caption{Relation between petitions, machines and steps (view A)}
+\label{fig:3d-a}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\plotthreedee{45}{20}
+	\end{tikzpicture}
+	\caption{Relation between petitions, machines and steps (view B)}
+	\label{fig:3d-a}
+\end{figure}
 
 
 %----------------------------------------------------------------------------------------------------
