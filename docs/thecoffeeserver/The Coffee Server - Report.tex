@@ -223,32 +223,32 @@ This section formalizes the problem as a set of predicates, parameters, operator
 
 The predicates to be considered are the following:
 \begin{itemize}
-	\item Robot-location(o): the robot is in office o.
-	\item Robot-free: the robot has no cup of coffee
-	\item Robot-loaded(n): the robot has n cups of coffee
-	\item Petition(o,n): office o wants n cups of coffee
-	\item Served(o): office o has been served, no more coffee is needed in this office
-	\item Machine(o,n): there is a coffee machine in office o that produces n cups of coffee each time (with n equal to 1, 2 or 3)
-	\item Steps(x): the total distance travelled by the robot (calculated with Manhattan distance)
+	\item \texttt{Robot-location(o)}: the robot is in office o.
+	\item \texttt{Robot-free}: the robot has no cup of coffee
+	\item \texttt{Robot-loaded(n)}: the robot has n cups of coffee
+	\item \texttt{Petition(o,n)}: office o wants n cups of coffee
+	\item \texttt{Served(o)}: office o has been served, no more coffee is needed in this office
+	\item \texttt{Machine(o,n)}: there is a coffee machine in office o that produces n cups of coffee each time (with n equal to 1, 2 or 3)
+	\item \texttt{Steps(x)}: the total distance travelled by the robot (calculated with Manhattan distance)
 \end{itemize}
 
 The operators to be considered are the following:
 %where their precondition and postcondition lists are shown in Table \ref{operatorstable}:
 \begin{itemize}
-	\item Make(o,n): the robot makes n cups of coffee in the machine located at office o
+	\item \texttt{Make(o,n)}: the robot makes n cups of coffee in the machine located at office o
 	\begin{itemize}
-		\item Preconditions: Robot-location(o), Robot-free, Machine(o,n)
-		\item Postconditions: Robot-loaded(n), $\neg$Robot-free
+		\item Preconditions: \texttt{Robot-location(o)}, \texttt{Robot-free}, \texttt{Machine(o,n)}
+		\item Postconditions: \texttt{Robot-loaded(n)}, $\neg$\texttt{Robot-free}
 	\end{itemize}
-	\item Move(o1,o2): the robot moves from o1 to o2
+	\item \texttt{Move(o1,o2)}: the robot moves from o1 to o2
 	\begin{itemize}
-		\item Preconditions: Robot-location(o1), Steps(x) \footnote{As we will see in section \ref{Implementation Design}, the Steps(x) precondition has been removed from the final implementation, since it always exists in the current state.}.
-		\item Postconditions: Robot-location(o2), Steps(x+distance(o1,o2)), $\neg$Robot-location(o1), $\neg$Steps(x)
+		\item Preconditions: \texttt{Robot-location(o1)}, \texttt{Steps(x)} \footnote{As we will see in section \ref{Implementation Design}, the \texttt{Steps(x)} precondition has been removed from the final implementation, since it always exists in the current state.}.
+		\item Postconditions: \texttt{Robot-location(o2)}, \texttt{Steps(x+distance(o1,o2))}, $\neg$\texttt{Robot-location(o1)}, $\neg$\texttt{Steps(x)}
 	\end{itemize}
-	\item Serve(o,n): the robot delivers n cups of coffee to office o
+	\item \texttt{Serve(o,n)}: the robot delivers n cups of coffee to office o
 	\begin{itemize}
-		\item Preconditions: Robot-location(o), Robot-loaded(n), Petition(o,n)
-		\item Postconditions: Served(o), Robot-free, $\neg$Petition(o,n), $\neg$Robot-loaded(n)
+		\item Preconditions: \texttt{Robot-location(o)}, \texttt{Robot-loaded(n)}, \texttt{Petition(o,n)}
+		\item Postconditions: \texttt{Served(o)}, \texttt{Robot-free}, $\neg$\texttt{Petition(o,n)}, $\neg$\texttt{Robot-loaded(n)}
 	\end{itemize}
 \end{itemize}
 
@@ -267,7 +267,7 @@ Constraints that simplify the problem, as stated in \cite{problemdefinition}:
 \end{enumerate}
 
 
-Without taking into account the Steps(x) predicate, the search space of this problem is gigantic: Robot-location has 36 possible parameters, the robot has 4 possible states (free or loaded with 1, 2 or 3 coffees) and each petition can be served or still pending. Taking into account the Steps(x) predicate, the search space of this problem becomes infinite, since $x$ can take any value in $\mathbb{N}$.
+Without taking into account the \texttt{Steps(x)} predicate, the search space of this problem is gigantic: Robot-location has 36 possible parameters, the robot has 4 possible states (free or loaded with 1, 2 or 3 coffees) and each petition can be served or still pending. Taking into account the \texttt{Steps(x)} predicate, the search space of this problem becomes infinite, since $x$ can take any value in $\mathbb{N}$.
 
 
 “STRIPS uses a GPS-like means-end analysis strategy\cite{gps}. This combination of means-ends analysis and formal theorem-proving methods allows objects (world models) much more complex and general than any of those used in GPS and provides more powerful search heuristics than those found in theorem-proving programs”\cite{strips}. Thanks to this property, we can solve our problem although the search space is infinite.
@@ -297,52 +297,52 @@ In the Coffee Server problem, however, each predicate satisfies that only appear
 In general, given a set of predicates, the order in which we add its predicates to the stack can become crucial in order to make the planner more efficient, or even to avoid loops. When dealing with a specific problem, a previous analysis of it might suggest us some strategies about how to sort the predicates appropriately.
 
 
-In the Coffee Server problem we distinguish two kinds of set of predicates depending on the sorting process: firstly, the one associated with the goal state, which is the only that can contain Served(o) predicates; and secondly, the sets of predicates related to the precondition lists of the three operators. We detail the domain-knowledge applied to each of them separately, 
+In the Coffee Server problem we distinguish two kinds of set of predicates depending on the sorting process: firstly, the one associated with the goal state, which is the only that can contain \texttt{Served(o)} predicates; and secondly, the sets of predicates related to the precondition lists of the three operators. We detail the domain-knowledge applied to each of them separately, 
 
 \subsubsection{Sorting the Goal State}
 
-A reasonable goal state consists in a set of one or more Served(o) predicates plus an optional single Robot-location(o) to state the final office position of the robot. A goal state can potentially contain other predicates, but they are not relevant for this heuristic.
+A reasonable goal state consists in a set of one or more \texttt{Served(o)} predicates plus an optional single \texttt{Robot-location(o)} to state the final office position of the robot. A goal state can potentially contain other predicates, but they are not relevant for this heuristic.
 
 
-First of all, it is straightforward to see that all Served(o) predicates should be placed in the stack on top of the Robot-location(o). Then, a more complex strategy is required to sort the different Served(o) predicates. We point out that the order of these predicates may highly determine the number of steps of the itinerary followed by the robot, which is just the quantity that we would like to minimize. 
+First of all, it is straightforward to see that all \texttt{Served(o)} predicates should be placed in the stack on top of the \texttt{Robot-location(o)}. Then, a more complex strategy is required to sort the different \texttt{Served(o)} predicates. We point out that the order of these predicates may highly determine the number of steps of the itinerary followed by the robot, which is just the quantity that we would like to minimize. 
 
 
-We propose an heuristic function based on sorting the Served(o) predicates by looking for sequences of nearby ones (considering the Manhattan distance) starting from the initial and, it it is stated in the goal state, from the final position as well. More specifically:
+We propose an heuristic function based on sorting the \texttt{Served(o)} predicates by looking for sequences of nearby ones (considering the Manhattan distance) starting from the initial and, it it is stated in the goal state, from the final position as well. More specifically:
 \begin{enumerate}
-	\item We start looking for the Served(o) predicate whose position parameter is the closest to the initial position of the robot; it will be the first element taken into account by the planning process. This step defines the top part of the stack.
-	\item In the next step, if the goal state defines a final position for the robot and there are still unordered Served(o) predicates, we look for the Served(o) predicate whose position parameter is the closest to the final position of the robot; it will become the last Served(o) element taken into account by the planner. This step defines the bottom part of the stack
-	\item Until all Served(o) predicates are ordered, we repeat:
+	\item We start looking for the \texttt{Served(o)} predicate whose position parameter is the closest to the initial position of the robot; it will be the first element taken into account by the planning process. This step defines the top part of the stack.
+	\item In the next step, if the goal state defines a final position for the robot and there are still unordered \texttt{Served(o)} predicates, we look for the \texttt{Served(o)} predicate whose position parameter is the closest to the final position of the robot; it will become the last \texttt{Served(o)} element taken into account by the planner. This step defines the bottom part of the stack
+	\item Until all \texttt{Served(o)} predicates are ordered, we repeat:
 	\begin{enumerate}
-		\item We consider the last Served(o) predicate added to the top part of the stack, and look for its closest Served(o9 predicate among the remaining ones; it will be the following Served(o) predicate in that top part of the stack.
-		\item If there are still unordered Served(o) predicates and the goal state defines a final position, we consider now the last Served(o) predicate added to the bottom part of the stack, and again look for its closest Served(o) predicate among the remaining ones; it will become the top Served(o) predicate in that bottom part of the stack.
+		\item We consider the last \texttt{Served(o)} predicate added to the top part of the stack, and look for its closest Served(o9 predicate among the remaining ones; it will be the following \texttt{Served(o)} predicate in that top part of the stack.
+		\item If there are still unordered \texttt{Served(o)} predicates and the goal state defines a final position, we consider now the last \texttt{Served(o)} predicate added to the bottom part of the stack, and again look for its closest \texttt{Served(o)} predicate among the remaining ones; it will become the top \texttt{Served(o)} predicate in that bottom part of the stack.
 	\end{enumerate}
 \end{enumerate}
 This is a fairly simple process that allows us to obtain a reasonable order of serving the commands, avoiding considering two consecutive far petitions while there are closer ones, as well as taking into account the final state (provided it is stated in the goal state) besides the initial one so that, if possible, the robot does not serve the last coffee request far from its final position. 
 
 
-Note that our heuristic does not guarantee an optimal organization at all; it does not even take into account the locations of the coffee machines when sorting the Served(o) predicates. A more sophisticated heuristic may lead to solutions closer (or equal) to the optimal one, but in that case it is actually resolving the entire planning problem beforehand.
+Note that our heuristic does not guarantee an optimal organization at all; it does not even take into account the locations of the coffee machines when sorting the \texttt{Served(o)} predicates. A more sophisticated heuristic may lead to solutions closer (or equal) to the optimal one, but in that case it is actually resolving the entire planning problem beforehand.
 
 
 \subsubsection{Sorting the precondition list of an operator}
 
 When adding the predicates of a precondition list, we realize that:
 \begin{itemize}
-	\item If the precondition list corresponds to the Move(o1,o2) operator, it doesn’t matter the order in which its predicates are added to the stack. 
-	\item If the precondition list corresponds to the Make([o],n) operator, it is desirable to add its predicates in the following order
+	\item If the precondition list corresponds to the \texttt{Move(o1,o2)} operator, it doesn’t matter the order in which its predicates are added to the stack. 
+	\item If the precondition list corresponds to the \texttt{Make([o],n)} operator, it is desirable to add its predicates in the following order
 	\begin{itemize}
-		\item Firstly, Robot-location([o]);
-		\item Then Machine([o], n);
-		\item Lastly, Robot-free.
+		\item Firstly, \texttt{Robot-location([o])};
+		\item Then \texttt{Machine([o], n)};
+		\item Lastly, \texttt{Robot-free}.
 	\end{itemize}
-	In that way, the top element of the stack is Robot-free (to ensure that the robot is not holding coffees already), the second one Machine([o], n) (to look for the location of a Machine that can make a given number of coffees), and finally we validate Robot-location([o]) (to make the robot be at the location of the selected machine). 
-	\item If the precondition list corresponds to the Serve(o,[n]) operator, there is also a preferred order when adding its predicates to the stack:
+	In that way, the top element of the stack is \texttt{Robot-free} (to ensure that the robot is not holding coffees already), the second one \texttt{Machine([o], n)} (to look for the location of a Machine that can make a given number of coffees), and finally we validate \texttt{Robot-location([o])} (to make the robot be at the location of the selected machine). 
+	\item If the precondition list corresponds to the \texttt{Serve(o,[n])} operator, there is also a preferred order when adding its predicates to the stack:
 	\begin{itemize}
-		\item Firstly, Robot-location(o);
-		\item Then Robot-loaded([n]);
-		\item Lastly, Petition(o,[n]).
+		\item Firstly, \texttt{Robot-location(o)};
+		\item Then \texttt{Robot-loaded([n])};
+		\item Lastly, \texttt{Petition(o,[n])}.
 	\end{itemize}
-	Thus, the first predicate to be evaluated is Petition(o,[n]) (to look for the number of coffees requested at that office), the next one is Robot-loaded([n]) (to make sure that it holds the requested number of coffees), and Robot-location(o) afterwards (to make the robot be at the office where it must serve those coffees). 
-	\item We point out that, when sorting the precondition list of a Make(o,n) or Serve(o,n) operator, different orders than the ones shown above may lead to fool behaviours of the robot, or even to stop the planner without finding a solution; these effects are consequences of illogical or nonexisting matches for the required instantiations. 
+	Thus, the first predicate to be evaluated is \texttt{Petition(o,[n])} (to look for the number of coffees requested at that office), the next one is \texttt{Robot-loaded([n])} (to make sure that it holds the requested number of coffees), and \texttt{Robot-location(o)} afterwards (to make the robot be at the office where it must serve those coffees). 
+	\item We point out that, when sorting the precondition list of a \texttt{Make(o,n)} or \texttt{Serve(o,n)} operator, different orders than the ones shown above may lead to fool behaviours of the robot, or even to stop the planner without finding a solution; these effects are consequences of illogical or nonexisting matches for the required instantiations. 
 \end{itemize}
 
 
@@ -365,7 +365,7 @@ We also note that the all orders stated above are compatible with a general orde
 
 For instance, given a set of predicates that comes from a precondition list, one valid order for looking for the predicates (and add them to the stack if found) is the following:
 
-Steps(x), Robot-location(o), Machine(o,n), Robot-loaded(n), Robot-free, Petition(o,n)
+\texttt{Steps(x)}, \texttt{Robot-location(o)}, \texttt{Machine(o,n)}, \texttt{Robot-loaded(n)}, \texttt{Robot-free}, \texttt{Petition(o,n)}
 
 
 \subsection{Instantiating a Parameter} \label{Instantiating a Parameter}
@@ -373,7 +373,7 @@ Steps(x), Robot-location(o), Machine(o,n), Robot-loaded(n), Robot-free, Petition
 When considering predicates that are partially instantiated, the STRIPS algorithm searches for possible values of the non-instantiated parameters taking into account the current state at that moment. In a specific problem, when different candidates for a given instantiation are found, the domain-knowledge of that problem can help to define an heuristic function in order to find the most appropriate value among the candidates.
 
 
-In the Coffee Server problem, if the sorting of the sets of predicates is made as we have explained in the previous subsection, the STRIPS algorithm can only find the following partially instantiated predicates\footnote{one may note that steps([x]) is not in the list. This is due to the fact that, in our implementation, the predicate Steps(x) is not contained in the precondition list of the Move(o1,o2) operator, as it is explained in Section \ref{Implementation Design}}:
+In the Coffee Server problem, if the sorting of the sets of predicates is made as we have explained in the previous subsection, the STRIPS algorithm can only find the following partially instantiated predicates\footnote{one may note that steps([x]) is not in the list. This is due to the fact that, in our implementation, the predicate \texttt{Steps(x)} is not contained in the precondition list of the \texttt{Move(o1,o2)} operator, as it is explained in Section \ref{Implementation Design}}:
 Machine([o],n) (coming from the precondition list of the Make([o],n) operator);
 Petition(o,[n])(from Serve(o,[n]) operator);
 Robot-location([o1]) (from Move([o1],o2) operator);
@@ -436,7 +436,7 @@ In this section we present and compare the results of several testing cases solv
 \begin{itemize}
 	\item Case 1: the example proposed in the problem definition. It consists on 5 petitions and 5 machines, and the proposal solves it with 25 steps.
 	\item Case 2: a random example. It consists on 10 petitions and 10 machines.
-	\item Case 3: another random example, but without a Robot-location(o) predicate in the goal state. It consists on 5 petitions and 5 machines.
+	\item Case 3: another random example, but without a \texttt{Robot-location(o)} predicate in the goal state. It consists on 5 petitions and 5 machines.
 	\item Case 4: a difficult case for our heuristic functions, that solve the problem in a very inefficient way. This is an example of a worst-case scenario for our solution: all petitions are distributed on two ends of the grid, and satisfy that all their suitable machines are located in their opposite end. We expect the robot to be constantly crossing without optimizing the travels at all.
 	\item Case 5: an impossible case, where there is a petition of 1 coffees but no machines. It is expected that the program throws an error.
 	\item Case 6: a random case with a lot of petitions (11) but few machines (3).
@@ -484,12 +484,14 @@ Table \ref{results} shows the performance of our algorithm measured in the numbe
 }
 
 In case 5, the program throws the following message:
-Error. Predicate "Machine([o],1)" cannot be instantiated in the state "Petition(o1,1);Steps(0);Robot-free;Robot-location(o1);".
+\begin{listing}[style=consola, numbers=none]
+Error. Predicate "Machine([o],1)" cannot be instantiated in the state "Petition(o1,1);Steps(0);Robot-free;Robot-location(o1);"
+\end{listing}
 
 In case 4, as we expected, we obtain the worst result by far. The robot, as we can see with much more detail in Appendix C, Case 4, instead of taking advantage of the crossings from one end to the other to serve the petitions of both sides at the same time, does respect the sequence of nearest petitions that the heuristic provides it and, consequently, delivers the petitions with a larger number of steps than required.
 
 
-As the table shows, our solution is near the optimal solution for the major part of cases, but it is very inefficient for specific cases where the heuristic function do not sort the Served(o) predicates in a good way, since it does not take in account the position of the machines. However, this table is short and does not represents correctly the performance of our solution.
+As the table shows, our solution is near the optimal solution for the major part of cases, but it is very inefficient for specific cases where the heuristic function do not sort the \texttt{Served(o)} predicates in a good way, since it does not take in account the position of the machines. However, this table is short and does not represents correctly the performance of our solution.
 
 
 In order to have a better idea of the performance of the algorithm, we also created 300 random cases, where each case has a random number of machines between 1 and 36 and a random number of petitions between 1 and 36. All cases can be solved, since there exists a machine that makes N coffees for each petition of N coffees.
