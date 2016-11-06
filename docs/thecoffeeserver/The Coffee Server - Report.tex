@@ -186,11 +186,12 @@ backgroundcolor=\color{gray97},
 
 \section{Introduction} \label{Introduction}
 
-In this paper, we present a solution for the practical proposed exercise\cite{problemdefinition} in PAR course\cite{par}. In the following sections our team presents a definition of the problem and analyzes its characteristics, in order to formalize it as a set of operators and predicates to be able to solve it using the STRIPS algorithm\cite{strips}. Later our team proposes several heuristic methods to optimize the result of the solver for this specific problem and presents a solution implemented in Java\cite{java}. Finally, a table of results is presented and analyzed.
+In this paper, we present a solution for the practical proposed exercise\cite{problemdefinition} in PAR course\cite{par}. In the following sections our team presents a definition of the problem and analyzes its characteristics, in order to formalize it as a set of operators and predicates to be able to solve it by using the STRIPS algorithm\cite{strips}. Later, our team proposes several heuristic methods to optimize the result of the solver for this specific problem and presents a solution implemented in Java\cite{java}. Finally, a table of results is presented and analyzed.
 
 
 Appendix A contains the system requirements and the necessary instructions to execute the proposed solution.
 
+\newpage
 %----------------------------------------------------------------------------------------------------
 
 \section{Definition of the Problem} \label{Definition of the Problem}
@@ -210,7 +211,7 @@ The goal is to serve all the drinks to all the offices in an efficient way (mini
 The robot will start with a given initial configuration (different for each test), with some petitions of coffee on a subset of the offices in the building. The initial configuration also establishes the positions of the coffee machines and the initial position of the robot. In the goal state no more petitions are pending to be served.”
 
 
-In this practical exercise our team have to design and implement (in Java) a linear planner with a stack of goals (STRIPS) that can discover how to go efficiently from an initial state of the world to the goal state explained before.
+In this practical exercise, our team must design and implement (in Java) a linear planner with a stack of goals (STRIPS) that can discover how to go efficiently from an initial state of the world to a certain goal state of the kind explained before.
 
 
 \newpage
@@ -233,7 +234,6 @@ The predicates to be considered are the following:
 \end{itemize}
 
 The operators to be considered are the following:
-%where their precondition and postcondition lists are shown in Table \ref{operatorstable}:
 \begin{itemize}
 	\item \texttt{Make(o,n)}: the robot makes n cups of coffee in the machine located at office o
 	\begin{itemize}
@@ -243,7 +243,8 @@ The operators to be considered are the following:
 	\item \texttt{Move(o1,o2)}: the robot moves from o1 to o2
 	\begin{itemize}
 		\item Preconditions: \texttt{Robot-location(o1)}, \texttt{Steps(x)} \footnote{As we will see in section \ref{Implementation Design}, the \texttt{Steps(x)} precondition has been removed from the final implementation, since it always exists in the current state.}.
-		\item Postconditions: \texttt{Robot-location(o2)}, \texttt{Steps(x+distance(o1,o2))}, $\neg$\texttt{Robot-location(o1)}, $\neg$\texttt{Steps(x)}
+		\item Postconditions: \texttt{Robot-location(o2)},\texttt{Steps(x+distance(o1,o2))}, \\
+		$\neg$\texttt{Robot-location(o1)}, $\neg$\texttt{Steps(x)}
 	\end{itemize}
 	\item \texttt{Serve(o,n)}: the robot delivers n cups of coffee to office o
 	\begin{itemize}
@@ -254,16 +255,16 @@ The operators to be considered are the following:
 
 There are three types of parameters to be considered:
 \begin{itemize}
-	\item o: this parameter represents a location in the grid in terms of the number of the office. Since we have a finite $6 \times 6$ grid, the allowed value for this parameter is oi, where i is a natural number between 1 and 36 (inclusive).
-	\item n: represents the number of coffees. We only consider petitions and machines up to 3 coffees, so it can only take the values 1, 2 and 3.
-	\item x: this parameter represents a certain number of steps (i.e. a single or accumulated Manhattan distance), and its value can take any natural number (including 0). 
+	\item \texttt{o}: this parameter represents a location in the grid in terms of the number of the office. Since we have a finite $6 \times 6$ grid, the allowed value for this parameter is \texttt{o}i, where i is a natural number between 1 and 36 (inclusive).
+	\item \texttt{n}: represents the number of coffees. We only consider petitions and machines up to 3 coffees, so it can only take the values 1, 2 and 3.
+	\item \texttt{x}: this parameter represents a certain number of steps (i.e. a single or accumulated Manhattan distance), and its value can take any natural number (including 0). 
 \end{itemize}
 
 
 Constraints that simplify the problem, as stated in \cite{problemdefinition}:
 \begin{enumerate}
 	\item The robot only makes coffee for a single petition each time. That is, the robot cannot make 3 cups of coffee to serve two different offices. First, will make coffee of one office and serve it, and after will go to the same or another coffee machine to serve the second office.
-	\item If a petition is of n cups, the robot will make coffee only with a unique machine of capacity n. That is, the robot cannot make coffee with 2 or more machines and accumulate the cups to serve a unique petition.
+	\item If a petition is of \texttt{n} cups, the robot will make coffee only with a unique machine of capacity n. That is, the robot cannot make coffee with 2 or more machines and accumulate the cups to serve a unique petition.
 \end{enumerate}
 
 
@@ -272,7 +273,10 @@ Without taking into account the \texttt{Steps(x)} predicate, the search space of
 
 “STRIPS uses a GPS-like means-end analysis strategy\cite{gps}. This combination of means-ends analysis and formal theorem-proving methods allows objects (world models) much more complex and general than any of those used in GPS and provides more powerful search heuristics than those found in theorem-proving programs”\cite{strips}. Thanks to this property, we can solve our problem although the search space is infinite.
 
+Finally, we want to note the following special situation: when there exist a petition for a number of coffees that no machine is able to make. In this case, it is impossible to achieve the goal state from the initial one, since the initial and goal states actually belong to different subgraphs of the search space that doesn’t share any connection 
 
+
+\newpage
 %----------------------------------------------------------------------------------------------------
 
 \section{Planning Algorithm} \label{Planning Algorithm}
@@ -313,7 +317,7 @@ We propose an heuristic function based on sorting the \texttt{Served(o)} predica
 	\item In the next step, if the goal state defines a final position for the robot and there are still unordered \texttt{Served(o)} predicates, we look for the \texttt{Served(o)} predicate whose position parameter is the closest to the final position of the robot; it will become the last \texttt{Served(o)} element taken into account by the planner. This step defines the bottom part of the stack
 	\item Until all \texttt{Served(o)} predicates are ordered, we repeat:
 	\begin{enumerate}
-		\item We consider the last \texttt{Served(o)} predicate added to the top part of the stack, and look for its closest Served(o9 predicate among the remaining ones; it will be the following \texttt{Served(o)} predicate in that top part of the stack.
+		\item We consider the last \texttt{Served(o)} predicate added to the top part of the stack, and look for its closest \texttt{Served(o)} predicate among the remaining ones; it will be the following \texttt{Served(o)} predicate in that top part of the stack.
 		\item If there are still unordered \texttt{Served(o)} predicates and the goal state defines a final position, we consider now the last \texttt{Served(o)} predicate added to the bottom part of the stack, and again look for its closest \texttt{Served(o)} predicate among the remaining ones; it will become the top \texttt{Served(o)} predicate in that bottom part of the stack.
 	\end{enumerate}
 \end{enumerate}
@@ -342,9 +346,9 @@ When adding the predicates of a precondition list, we realize that:
 		\item Lastly, \texttt{Petition(o,[n])}.
 	\end{itemize}
 	Thus, the first predicate to be evaluated is \texttt{Petition(o,[n])} (to look for the number of coffees requested at that office), the next one is \texttt{Robot-loaded([n])} (to make sure that it holds the requested number of coffees), and \texttt{Robot-location(o)} afterwards (to make the robot be at the office where it must serve those coffees). 
-	\item We point out that, when sorting the precondition list of a \texttt{Make(o,n)} or \texttt{Serve(o,n)} operator, different orders than the ones shown above may lead to fool behaviours of the robot, or even to stop the planner without finding a solution; these effects are consequences of illogical or nonexisting matches for the required instantiations. 
 \end{itemize}
 
+We point out that, when sorting the precondition list of a \texttt{Make(o,n)} or \texttt{Serve(o,n)} operator, different orders than the ones shown above may lead to fool behaviours of the robot, or even to stop the planner without finding a solution; these effects are consequences of illogical or nonexisting matches for the required instantiations. 
 
 We also note that the all orders stated above are compatible with a general order provided that it respects the priorities shown in Table \ref{orderpriority}, where it doesn’t matter the relative order between predicates that share the same priority. 
 
@@ -373,14 +377,15 @@ For instance, given a set of predicates that comes from a precondition list, one
 When considering predicates that are partially instantiated, the STRIPS algorithm searches for possible values of the non-instantiated parameters taking into account the current state at that moment. In a specific problem, when different candidates for a given instantiation are found, the domain-knowledge of that problem can help to define an heuristic function in order to find the most appropriate value among the candidates.
 
 
-In the Coffee Server problem, if the sorting of the sets of predicates is made as we have explained in the previous subsection, the STRIPS algorithm can only find the following partially instantiated predicates\footnote{one may note that steps([x]) is not in the list. This is due to the fact that, in our implementation, the predicate \texttt{Steps(x)} is not contained in the precondition list of the \texttt{Move(o1,o2)} operator, as it is explained in Section \ref{Implementation Design}}:
-Machine([o],n) (coming from the precondition list of the Make([o],n) operator);
-Petition(o,[n])(from Serve(o,[n]) operator);
-Robot-location([o1]) (from Move([o1],o2) operator);
+In the Coffee Server problem, if the sorting of the sets of predicates is made as we have explained in the previous subsection, the STRIPS algorithm can only find the following partially instantiated predicates\footnote{one may note that \texttt{Steps([x])} is not in the list. This is due to the fact that, in our implementation, the predicate \texttt{Steps(x)} is not contained in the precondition list of the \texttt{Move(o1,o2)} operator, as it is explained in Section \ref{Implementation Design}}:
+\begin{itemize}
+	\item \texttt{Machine([o],n)} (coming from the precondition list of the \texttt{Make([o],n)} operator);
+	\item \texttt{Petition(o,[n])} (from \texttt{Serve(o,[n])} operator);
+	\item \texttt{Robot-location([o1])} (from \texttt{Move([o1],o2)} operator);
 Note that the parameters between brackets are the uninstantiated ones.
 
 
-For each of these predicates, the STRIPS algorithm tries to obtain a valid value for its parameter by matching the corresponding predicate with predicates in the current state that have the same name and, if the predicate we want to instantiate has already an instantiated parameter, share the same value of this parameter as well. In our case, whereas the algorithm only returns a single match for  Petition(o,[n]) and Robot-location([o1]), it can actually return a set of several valid matches for Machine([o],n). 
+For each of these predicates, the STRIPS algorithm tries to obtain a valid value for its parameter by matching the corresponding predicate with predicates in the current state that have the same name and, if the predicate we want to instantiate has already an instantiated parameter, share the same value of this parameter as well. In our case, whereas the algorithm only returns a single match for \texttt{Petition(o,[n])} and \texttt{Robot-location([o1])}, it can actually return a set of several valid matches for \texttt{Machine([o],n)}. 
 
 
 When we have different candidates for the position of the Machine predicate, as we are interested in minimizing the number of steps, our strategy is to choose the position $o’$ among them that minimizes
@@ -390,9 +395,11 @@ Where $o_0$ is the current location of the robot and $o_f$ the location of the p
 
 With this heuristic function we guarantee that the robot always goes to the coffee machine that, given the current location, implies the lower number of steps required to go to make the coffees and then go to serve them.
 
+\newpage
 %----------------------------------------------------------------------------------------------------
 
 \section{Implementation Design} \label{Implementation Design}
+
 The implementation of the solution for this problem is divided into two parts:
 \begin{enumerate}
 	\item The general STRIPS algorithm.
@@ -427,7 +434,7 @@ Package \texttt{com.gbjl.strips.examples.thecoffeeserver} contains the particula
 	\item \texttt{MoveOperator}: this class extends from \texttt{Operator}. It adds the required parameters, preconditions and postconditions to itself and overrides the \texttt{getPostconditions(...)} method, to be able to return the predicate \texttt{Steps(x+d)} based on the current state \texttt{Steps(x)} predicate. In order to simplify the problem, predicate \texttt{Steps(x)} has not been included in the list of preconditions of this operator, since it always exists in the current state.
 \end{itemize}
 
-
+\newpage
 %----------------------------------------------------------------------------------------------------
 
 \section{Results} \label{Results}
@@ -555,6 +562,7 @@ In \ref{fig:2d-petitions} we can see how the number of machines define a top lim
 \end{figure}
 
 
+\newpage
 %----------------------------------------------------------------------------------------------------
 
 \section{Conclusions and Future Work} \label{Conclusions}
@@ -573,9 +581,9 @@ Finally, a table of results was presented and analyzed, and we concluded that ou
 In general, due to the nature of the STRIPS algorithm, this program does not find the optimal plan for serving coffee with the minimum number of robot steps. Nevertheless, it can be close to it in many situations thanks to the proposed heuristic functions. Optimal solutions for this problem may be found using, for example, a non-linear planning algorithm with regression, but this subject is out of the scope of this paper.
 
 
-
-%--------------------------------------------------------------------------------------------------
 \newpage
+%--------------------------------------------------------------------------------------------------
+
 
 %\thispagestyle{plain}
 \addcontentsline{toc}{section}{References}\sectionmark{References}
@@ -670,7 +678,7 @@ This is a complete class diagram of the system. Note that relation multiplicitie
 
 \addcontentsline{toc}{section}{Appendix C: Test Results}\sectionmark{Appendix C: Test Results}
 
-This appendix contains a detailed representation of the state and stack evolution of each test execution proposed in section REFERENCIASECCIONTESTS.
+This appendix contains a detailed representation of the state and stack evolution of each test execution proposed in Section \ref{Results}
 
 
 For reasons of space, we abbreviated some predicates with the following dictionary:
