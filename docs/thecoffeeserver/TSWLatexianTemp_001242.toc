@@ -1,0 +1,27 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {2}Definition of the Problem}{1}{section.2}
+\contentsline {section}{\numberline {3}Analysis of the Problem}{2}{section.3}
+\contentsline {section}{\numberline {4}Planning Algorithm}{3}{section.4}
+\contentsline {subsection}{\numberline {4.1}Choosing an operator}{3}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Sorting a Set of Predicates}{4}{subsection.4.2}
+\contentsline {subsubsection}{Sorting the Goal State}{4}{section*.2}
+\contentsline {subsubsection}{Sorting the precondition list of an operator}{5}{section*.3}
+\contentsline {subsection}{\numberline {4.3}Instantiating a Parameter}{6}{subsection.4.3}
+\contentsline {section}{\numberline {5}Implementation Design}{6}{section.5}
+\contentsline {section}{\numberline {6}Results}{8}{section.6}
+\contentsline {section}{\numberline {7}Conclusions and Future Work}{10}{section.7}
+\contentsline {section}{References}{11}{section.7}
+\contentsline {section}{Appendix A: Instructions to Execute the Program}{12}{section*.5}
+\contentsline {section}{Appendix B: Complete Class Diagram}{13}{section*.9}
+\contentsline {section}{Appendix C: Test Results}{14}{section*.10}
+\contentsline {subsubsection}{State evolution}{14}{section*.13}
+\contentsline {subsubsection}{Stack evolution}{15}{section*.14}
+\contentsline {subsubsection}{State evolution}{20}{section*.17}
+\contentsline {subsubsection}{Stack evolution}{22}{section*.18}
+\contentsline {subsubsection}{State evolution}{33}{section*.21}
+\contentsline {subsubsection}{Stack evolution}{34}{section*.22}
+\contentsline {subsubsection}{State evolution}{38}{section*.25}
+\contentsline {subsubsection}{Stack evolution}{39}{section*.26}
+\contentsline {subsubsection}{State evolution}{42}{section*.32}
+\contentsline {subsubsection}{Stack evolution}{44}{section*.33}
