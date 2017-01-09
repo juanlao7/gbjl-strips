@@ -9,6 +9,11 @@ public class Param {
         this.instantiated = instantiated;
     }
     
+    public Param(Param original) {
+        this.name = original.name;
+        this.instantiated = original.instantiated;
+    }
+    
     public String getName() {
         return this.name;
     }
